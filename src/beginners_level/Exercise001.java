@@ -1,10 +1,23 @@
 package beginners_level;
 
+/**
+ * First class for study
+ * 
+ * @author danil
+ * @since JDK17
+ * @see
+ */
 public class Exercise001 {
-	
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
-		System.out.println("My first code in java.");
+		/*
+		 * displaying some information
+		 */
+		System.out.println("Hello World!"); // simple text in line
+		System.out.print("My first code in java.");
 	}
 	
 }
