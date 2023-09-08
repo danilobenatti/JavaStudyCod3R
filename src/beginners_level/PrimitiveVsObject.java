@@ -31,7 +31,7 @@ public class PrimitiveVsObject {
 		System.out.println(e.booleanValue());
 		System.out.println(Boolean.parseBoolean("TRUE"));
 		System.out.println(c.charValue() + "gmail");
-		System.out.println(getUnicodeCharacterOfChar(c));
+		System.out.println(getUnicodeCharacterOfChar('@'));
 		System.out.println(BigDecimal.valueOf(d).toEngineeringString());
 	}
 	
