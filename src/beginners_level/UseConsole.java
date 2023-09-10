@@ -15,26 +15,25 @@ public class UseConsole {
 	
 	public static void main(String[] args) {
 		
-		Person person = new Person();
+		Person p = new Person();
 		
-		try (Scanner scanner = new Scanner(System.in)) {
-			scanner.useLocale(new Locale("en", "US"));
+		try (Scanner scanner = new Scanner(System.in).useLocale(Locale.US)) {
 			log.info("Inform name[Ex. Mary]: ");
-			person.setName(scanner.next());
+			p.setName(scanner.next());
 			log.info("Inform gender(M/F)[Ex. F]: ");
-			person.setGender(Character.toUpperCase(scanner.next().charAt(0)));
+			p.setGender(Character.toUpperCase(scanner.next().charAt(0)));
 			log.info("Inform height[Ex. 1.65]: ");
-			person.setHeight(scanner.nextFloat());
+			p.setHeight(Float.parseFloat(scanner.next().replace(',', '.')));
 			log.info("Inform weight[Ex. 68.7}]: ");
-			person.setWeight(scanner.nextFloat());
-			person.setBornDate(LocalDate.now().minusYears(27));
-			person.setDeathDate(LocalDate.now());
+			p.setWeight(Float.parseFloat(scanner.next().replace(',', '.')));
+			p.setBornDate(LocalDate.now().minusYears(27));
+			p.setDeathDate(LocalDate.now());
 		}
 		
-		String imc = Imc.imcByGender(person.getWeight(), person.getHeight(),
-			person.getGender());
+		String imc = Imc.imcByGender(p.getWeight(), p.getHeight(),
+			p.getGender());
 		
-		Object[] params = { person, person.getAgeWithSymbol(), imc };
+		Object[] params = { p, p.getAgeWithSymbol(), imc };
 		log.log(Level.INFO, "Info: {0}; Age: {1}; IMC = {2}", params);
 		
 	}

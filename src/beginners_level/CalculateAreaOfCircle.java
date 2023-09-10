@@ -6,6 +6,7 @@ import java.util.Locale;
 import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.math3.util.MathUtils;
 
 public class CalculateAreaOfCircle {
 	
@@ -29,7 +30,7 @@ public class CalculateAreaOfCircle {
 		
 		double areaByDiameter = Math.PI * Math.pow(diameter, 2) / 4;
 		
-		double perimeterByRadio = 2 * Math.PI * radius;
+		double perimeterByRadio = MathUtils.TWO_PI * radius;
 		double perimeterByDiameter = Math.PI * diameter;
 		
 		System.out.println(areaByRadio);
