@@ -7,7 +7,7 @@ package beginners_level;
  * @since JDK17
  * @see
  */
-public class Exercise001 {
+public class FisrtSteps {
 	/**
 	 * 
 	 * @param args
