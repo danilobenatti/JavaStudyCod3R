@@ -2,12 +2,11 @@ package beginners_level;
 
 import static javax.swing.JOptionPane.QUESTION_MESSAGE;
 import static javax.swing.JOptionPane.showInputDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
 import static org.apache.commons.lang3.StringUtils.LF;
-import static org.apache.commons.lang3.StringUtils.SPACE;
 
 import java.math.BigDecimal;
-
-import javax.swing.JOptionPane;
+import java.util.Locale;
 
 import lombok.Getter;
 
@@ -35,13 +34,14 @@ public class CalculatorChallenge {
 			default -> BigDecimal.ZERO;
 		};
 		StringBuilder builder = new StringBuilder().append(op.name()).append(LF)
-			.append("Code:").append(SPACE).append(op.getCode()).append(LF)
-			.append("Desc:").append(SPACE).append(op.getDescription())
-			.append(LF).append("Symbol:").append(SPACE).append(op.getSymbol())
-			.append(LF).append(String.format("(%s) %.2f %s %.2f = %.2f",
-				op.getDescription(), num1, op.getSymbol(), num2, result));
+			.append("Code: ").append(op.getCode()).append(LF).append("Desc: ")
+			.append(op.getDescription()).append(LF).append("Symbol: ")
+			.append(op.getSymbol()).append(LF)
+			.append(String.format(Locale.US, "(%s) %.2f %s %.2f = %.2f",
+				op.getDescription(), num1, op.getSymbol(), num2, result))
+			.append(LF).append("Result: ").append(result);
 		System.out.println(builder);
-		JOptionPane.showMessageDialog(null, builder);
+		showMessageDialog(null, builder);
 	}
 	
 }
