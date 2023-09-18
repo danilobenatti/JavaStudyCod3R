@@ -9,48 +9,70 @@ public class StructureIfElse {
 	
 	public static void main(String[] args) {
 		
-		Locale locale = new Locale("en", "US");
+		Locale localeUS = new Locale.Builder().setRegion("en").setLanguage("US")
+			.build();
 		
-		BigDecimal number;
+		BigDecimal value;
 		
-		try (Scanner scanner = new Scanner(System.in).useLocale(locale)) {
+		try (Scanner scanner = new Scanner(System.in).useLocale(localeUS)) {
 			System.out.print("Inform final note: ");
-			number = scanner.nextBigDecimal()
-				.setScale(1, RoundingMode.HALF_EVEN).abs();
+			value = scanner.nextBigDecimal().setScale(1, RoundingMode.HALF_EVEN)
+				.abs();
 		}
 		
-		System.out.println(number);
+		System.out.println(value);
 		
-		boolean approved = number.compareTo(BigDecimal.valueOf(7)) >= 0
-			&& number.compareTo(BigDecimal.valueOf(10)) <= 0;
-		boolean recovery = number.compareTo(BigDecimal.valueOf(4.9)) >= 0
-			&& number.compareTo(BigDecimal.valueOf(7)) < 0;
-		boolean lessEqualsThanTEN = number.compareTo(BigDecimal.TEN) <= 0;
-		boolean greaterEqualsZERO = number.compareTo(BigDecimal.ZERO) >= 0;
+		System.out.println(message1(value));
+		
+		System.out.println(message2(value));
+		
+	}
+	
+	private static String message1(BigDecimal value) {
+		
+		boolean approved = value.compareTo(BigDecimal.valueOf(7)) >= 0;
+		boolean recovery = !approved
+			&& value.compareTo(BigDecimal.valueOf(4.9)) >= 0;
+		boolean lessEqualsThanTEN = value.compareTo(BigDecimal.TEN) <= 0;
+		boolean greaterEqualsZERO = value.compareTo(BigDecimal.ZERO) >= 0;
 		boolean intoRange = lessEqualsThanTEN && greaterEqualsZERO;
 		
-		if (intoRange && approved) {
-			System.out.println("Approved");
-		} else if (intoRange && recovery) {
-			System.out.println("Recovery");
-		} else if (intoRange) {
-			System.out.println("Disapproved");
+		if (!intoRange) {
+			return "The value must be: greater or equal to ZERO and less or equal to TEN";
+		} else if (approved) {
+			return "Approved";
+		} else if (recovery) {
+			return "Recovery";
 		} else {
-			System.out.println(
-				"The value must be: greater or equal to ZERO and less or equal to TEN");
+			return "Disapproved";
 		}
+	}
+	
+	private static String message2(BigDecimal value) {
+		
+		boolean a = value.compareTo(BigDecimal.valueOf(9.0)) >= 0;
+		boolean b = !a && value.compareTo(BigDecimal.valueOf(7.5)) >= 0;
+		boolean c = !b && value.compareTo(BigDecimal.valueOf(5.0)) >= 0;
+		boolean d = !c && value.compareTo(BigDecimal.valueOf(3.7)) >= 0;
+		boolean e = value.compareTo(BigDecimal.valueOf(3.7)) < 0;
+		boolean intoRange = value.compareTo(BigDecimal.TEN) <= 0
+			&& value.compareTo(BigDecimal.ZERO) >= 0;
 		
 		if (!intoRange) {
-			System.out.println(
-				"The value must be: greater or equal to ZERO and less or equal to TEN");
-		} else if (approved) {
-			System.out.println("Approved");
-		} else if (recovery) {
-			System.out.println("Recovery");
+			return "The value must be: greater or equal to ZERO and less or equal to TEN";
+		} else if (a) {
+			return "Approved: A";
+		} else if (b) {
+			return "Approved: B";
+		} else if (c) {
+			return "Approved: C";
+		} else if (d) {
+			return "Recovery: D";
+		} else if (e) {
+			return "Disapproved: E";
 		} else {
-			System.out.println("Disapproved");
+			return "---";
 		}
-		
 	}
 	
 }

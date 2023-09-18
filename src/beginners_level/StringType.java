@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class StringType {
 	
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		
 		String str = "Hello".concat(StringUtils.SPACE).concat("world") + "!";
