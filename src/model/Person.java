@@ -1,8 +1,8 @@
 package model;
 
-import java.time.LocalDate;
+import static org.apache.commons.lang3.math.NumberUtils.INTEGER_ZERO;
 
-import org.apache.commons.lang3.math.NumberUtils;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,7 +48,7 @@ public class Person {
 			// 'deathDate' occurs after 'bornDate'
 			return deathDate.minusYears(bornDate.getYear()).getYear();
 		} else {
-			return NumberUtils.INTEGER_ZERO;
+			return INTEGER_ZERO;
 		}
 	}
 	

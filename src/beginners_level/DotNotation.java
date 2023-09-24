@@ -11,8 +11,7 @@ public class DotNotation {
 	public static void main(String[] args) {
 		
 		String str = "Hello World!";
-		int length = str.length();
-		System.out.println(sb.append("a)").append(SPACE).append(length));
+		System.out.println(sb.append("a)").append(SPACE).append(str.length()));
 		System.out.println("b) " + str.toUpperCase());
 		System.out.println(format("c) %s", str.replace('!', '?')));
 		System.out.println(format("d) %s", "Aloha Honua!".toLowerCase()));

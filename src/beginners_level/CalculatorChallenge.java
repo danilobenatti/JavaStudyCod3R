@@ -33,13 +33,15 @@ public class CalculatorChallenge {
 			case 3 -> num1.divide(num2);
 			default -> BigDecimal.ZERO;
 		};
-		StringBuilder builder = new StringBuilder().append(op.name()).append(LF)
-			.append("Code: ").append(op.getCode()).append(LF).append("Desc: ")
-			.append(op.getDescription()).append(LF).append("Symbol: ")
-			.append(op.getSymbol()).append(LF)
-			.append(String.format(Locale.US, "(%s) %.2f %s %.2f = %.2f",
-				op.getDescription(), num1, op.getSymbol(), num2, result))
-			.append(LF).append("Result: ").append(result);
+		StringBuilder builder = new StringBuilder();
+		builder.append(op.name()).append(LF);
+		builder.append("Code: ").append(op.getCode()).append(LF);
+		builder.append("Desc: ").append(op.getDescription()).append(LF);
+		builder.append("Symbol: ").append(op.getSymbol()).append(LF);
+		String str = String.format(Locale.US, "(%s) %.2f %s %.2f = %.2f",
+			op.getDescription(), num1, op.getSymbol(), num2, result);
+		builder.append(str).append(LF);
+		builder.append("Result: ").append(result);
 		System.out.println(builder);
 		showMessageDialog(null, builder);
 	}

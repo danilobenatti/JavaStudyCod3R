@@ -11,12 +11,12 @@ public class RepetitionStructuresExercise {
 		int[] numbersOfBet = new int[] { 34, 1, 50, 10, 57, 15 };
 		int[] numbersOfBetPlus = new int[] { 35, 2, 51, 15, 60, 25, 8, 45 };
 		int[] numbersOfBetPremium = new int[] { 34, 1, 50, 10, 25, 15, 18, 5,
-			52, 8, 20, 30, 28, 25, 33 };
+			52, 8, 20, 30, 28, 45, 33 };
 		
 		int[] lotteryNumbers = sortition(new Random(), 1, 60, 6);
 		
-		for (int n : lotteryNumbers) {
-			System.out.printf("%d  ", n);
+		for (int number : lotteryNumbers) {
+			System.out.printf("%d  ", number);
 		}
 		
 		System.out.printf("%nBet Standard(%d): %s", numbersOfBet.length,
