@@ -1,22 +1,20 @@
 package beginners_level;
 
+import static javax.swing.JOptionPane.QUESTION_MESSAGE;
+import static javax.swing.JOptionPane.showInputDialog;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.swing.JOptionPane;
 
 public class ConvertStringToNumber {
 	
 	public static void main(String[] args) {
 		
-		String str1 = JOptionPane.showInputDialog(null, "Info number1",
-			"Input Number1", JOptionPane.QUESTION_MESSAGE);
-		String str2 = JOptionPane.showInputDialog(null, "Info number2",
-			"Input Number2", JOptionPane.QUESTION_MESSAGE);
-		
-		double d1 = Double.parseDouble(str1);
-		double d2 = Double.parseDouble(str2);
+		double d1 = Double.parseDouble(showInputDialog(null, "Info number1",
+			"Input Number1", QUESTION_MESSAGE).replace(',', '.'));
+		double d2 = Double.parseDouble(showInputDialog(null, "Info number2",
+			"Input Number2", QUESTION_MESSAGE).replace(',', '.'));
 		
 		List<Double> list = Arrays.asList(d1, d2);
 		

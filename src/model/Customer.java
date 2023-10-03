@@ -3,21 +3,29 @@ package model;
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder.Default;
 import lombok.EqualsAndHashCode;
+import lombok.EqualsAndHashCode.Include;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@SuperBuilder(builderMethodName = "customerBuilder")
 public class Customer extends Person {
 	
-	private boolean isGoodPayer;
+	@Include
+	private String email;
+	
+	@Default
+	private boolean isGoodPayer = true;
 	
 	private LocalDate lastPurchaseDate;
 	

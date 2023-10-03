@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.Locale;
+import java.util.Locale.Builder;
 
 public class DayOfWeekChallenge {
 	
@@ -21,12 +22,12 @@ public class DayOfWeekChallenge {
 		};
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		
-		Locale localeBR = new Locale.Builder().setLanguage("pt").setRegion("BR")
-			.build();
-		Locale localeUS = new Locale("en", "US");
+		Builder builder = new Locale.Builder();
+		Locale localeBR = builder.setLanguage("pt").setRegion("BR").build();
+		
+		Locale localeUS = Locale.of("en", "US");
 		
 		LocalDate date = LocalDate.of(2023, Month.SEPTEMBER, 9);
 		
@@ -79,11 +80,12 @@ public class DayOfWeekChallenge {
 			default -> "Unexpected value";
 		};
 		
-		System.out.println(String.format("%s (%s)", str,
-			getFullDayWeekByLocale(now, localeBR)));
+		System.out.println(String.format("%s (%s) %d", str,
+			getFullDayWeekByLocale(now, localeBR),
+			now.getDayOfWeek().getValue()));
 		
-		System.out.println(String.format("%s (%s)", result,
-			getFullDayWeekByLocale(now, null)));
+		System.out.println(String.format("%s (%s) %d", result,
+			getFullDayWeekByLocale(now, null), now.getDayOfWeek().ordinal()));
 	}
 	
 }

@@ -3,15 +3,16 @@ package model;
 import static org.apache.commons.lang3.math.NumberUtils.INTEGER_ZERO;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.EqualsAndHashCode.Include;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
@@ -19,7 +20,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Builder
+@SuperBuilder(builderMethodName = "personBuilder")
 public class Person {
 	
 	@Include
@@ -56,5 +57,12 @@ public class Person {
 		String age = getAge().toString();
 		return isAlive() ? age.concat(String.valueOf('\u2605'))
 			: age.concat(String.valueOf('\u2020'));
+	}
+	
+	public void killPerson() {
+		ZoneId zoneid = ZoneId.systemDefault();
+		if (deathDate == null) {
+			this.deathDate = LocalDate.now(zoneid);
+		}
 	}
 }

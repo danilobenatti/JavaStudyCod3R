@@ -8,7 +8,7 @@ public class StructureWhile {
 	public static void main(String[] args) {
 		
 		// 0 - 9 (integer)
-		System.out.println((int) (Math.random() * 10));
+		System.out.println(new Random().nextInt(0, 11));
 		
 		// between 10 and 100 (integer)
 		int min = 10, max = 100;

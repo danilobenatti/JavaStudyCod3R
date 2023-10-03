@@ -2,6 +2,7 @@ package control_structure;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class RepetitionStructuresExercise {
@@ -28,9 +29,9 @@ public class RepetitionStructuresExercise {
 		
 	}
 	
-	private static HashMap<Integer, Boolean> resultOfBet(int[] numbersOfBet,
+	public static Map<Integer, Boolean> resultOfBet(int[] numbersOfBet,
 		int[] lotteryNumbers) {
-		HashMap<Integer, Boolean> result = new HashMap<>();
+		Map<Integer, Boolean> result = new HashMap<>();
 		for (int j : lotteryNumbers) {
 			for (int k : numbersOfBet) {
 				if (k == j) {
@@ -44,7 +45,7 @@ public class RepetitionStructuresExercise {
 		return result;
 	}
 	
-	private static int[] sortition(Random random, int min, int max, int size) {
+	public static int[] sortition(Random random, int min, int max, int size) {
 		int[] lotteryNumbers = new int[size];
 		int i = 0;
 		do {

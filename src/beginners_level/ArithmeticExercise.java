@@ -12,8 +12,9 @@ public class ArithmeticExercise {
 		int b = (int) Math.pow(a, 3);
 		int c = new Double(Math.pow(a, 3)).intValue();
 		int d = Double.valueOf(Math.pow(a, 3)).intValue();
-		int e = (int) Math.round(Math.pow(a, 3));
-		double f = new Power(3).value(a);
+		int e = ((Double) Math.pow(a, 3)).intValue();
+		int f = (int) Math.round(Math.pow(a, 3));
+		double g = new Power(3).value(a);
 		
 		System.out.println("a) " + a);
 		System.out.println("b) " + b);
@@ -21,6 +22,7 @@ public class ArithmeticExercise {
 		System.out.println("d) " + d);
 		System.out.println("e) " + e);
 		System.out.println("f) " + f);
+		System.out.println("g) " + g);
 		
 		Fraction f1 = new Fraction(1, 3);
 		Fraction f2 = new Fraction(1, 2);

@@ -1,19 +1,23 @@
 package beginners_level;
 
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.QUESTION_MESSAGE;
+import static javax.swing.JOptionPane.showInputDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static org.apache.commons.lang3.StringUtils.LF;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 
-import javax.swing.JOptionPane;
-
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.util.MathUtils;
 
 public class CalculateAreaOfCircle {
 	
+	static NumberFormat nf = NumberFormat
+		.getNumberInstance(Locale.of("pt", "BR"));
+	
 	public static void main(String[] args) {
 		
-		NumberFormat nf = NumberFormat.getNumberInstance(
-			new Locale.Builder().setLanguage("pt").setRegion("BR").build());
 		nf.setMinimumFractionDigits(5);
 		
 		final double PI = 3.14159;
@@ -21,8 +25,8 @@ public class CalculateAreaOfCircle {
 		System.out.println(PI);
 		System.out.println(PI == Math.PI);
 		
-		String str = JOptionPane.showInputDialog(null, "Inform radiu",
-			"Input Value", JOptionPane.QUESTION_MESSAGE);
+		String str = showInputDialog(null, "Inform radiu", "Input Value",
+			QUESTION_MESSAGE);
 		double radius = Double.parseDouble(str);
 		double diameter = 2 * radius;
 		
@@ -39,23 +43,23 @@ public class CalculateAreaOfCircle {
 		System.out.println(perimeterByDiameter);
 		
 		System.out.printf("Area by radius: %s%n", nf.format(areaByRadio));
-		System.out.printf("Area by diameter: %.5f%n", areaByDiameter);
-		System.out.printf("Perimeter by radius: %s%n", nf.format(perimeterByRadio));
-		System.out.printf("Perimeter by diameter: %.6f%n", perimeterByDiameter);
+		System.out.printf("Area by \u2205: %.5f%n", areaByDiameter);
+		System.out.printf("Perimeter by radius: %s%n",
+			nf.format(perimeterByRadio));
+		System.out.printf("Perimeter by \u2205: %.6f%n", perimeterByDiameter);
 		
-		StringBuilder builder = new StringBuilder();
-		builder.append("Radius info: ").append(radius);
-		builder.append(StringUtils.LF);
-		builder.append("Area by radius: ").append(nf.format(areaByRadio));
-		builder.append(StringUtils.LF);
-		builder.append("Area by diameter: ").append(nf.format(areaByDiameter));
-		builder.append(StringUtils.LF);
-		builder.append("Perimeter by radius: ").append(nf.format(perimeterByRadio));
-		builder.append(StringUtils.LF);
-		builder.append("Perimeter by diameter: ").append(nf.format(perimeterByDiameter));
-		JOptionPane.showMessageDialog(null, builder.toString(), "Result calc.",
-			JOptionPane.INFORMATION_MESSAGE);
-		System.exit(0);
+		StringBuilder sb = new StringBuilder();
+		sb.append("Radius info: ");
+		sb.append(radius).append(LF);
+		sb.append("Area by radius: ");
+		sb.append(nf.format(areaByRadio)).append(LF);
+		sb.append("Area by \u2205: ");
+		sb.append(nf.format(areaByDiameter)).append(LF);
+		sb.append("Perimeter by radius: ");
+		sb.append(nf.format(perimeterByRadio)).append(LF);
+		sb.append("Perimeter by \u2205: ");
+		sb.append(nf.format(perimeterByDiameter));
+		showMessageDialog(null, sb, "Result calc.", INFORMATION_MESSAGE);
 		
 	}
 }

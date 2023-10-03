@@ -5,6 +5,8 @@ import static java.text.DateFormat.MEDIUM;
 import static java.text.DateFormat.SHORT;
 import static java.text.DateFormat.getDateInstance;
 import static java.text.NumberFormat.getCurrencyInstance;
+import static java.time.Instant.parse;
+import static java.util.Date.from;
 import static org.apache.commons.lang3.StringUtils.LF;
 import static org.apache.commons.lang3.StringUtils.SPACE;
 
@@ -13,6 +15,7 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Year;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +28,7 @@ public class ProductTest {
 	
 	static final Locale LOCALE = Locale.of("pt", "BR");
 	
-	static final ZoneId ZONE = ZoneId.of("America/Sao_Paulo");
+	static final ZoneId ZONE_ID = ZoneId.of("America/Sao_Paulo");
 	
 	static DateFormat df = DateFormat.getDateTimeInstance(MEDIUM, FULL, LOCALE);
 	
@@ -43,19 +46,24 @@ public class ProductTest {
 		p1.name = "Product n\u00BA1";
 		p1.price = 150.8;
 		p1.weight = 1.8f;
-		p1.manufactureDate = Date
-			.from(Instant.parse("2023-09-19T00:00:00.00-03:00"));
-		
-		p1.setValidity(365L); // 365 days
+		p1.manufactureDate = from(parse("2023-09-19T00:00:00.00-03:00"));
 		p1.setCubicVolume(10.5f, 20.9f, 30.1f);
+		p1.setValidity(365L); // 365 days
 		
-		var p2 = new Product("Product n\u00BA2", 89.56, 2.5f,
-			new float[] { 15, 15, 30 },
-			Date.from(Instant.parse("2023-12-01T00:00:00.00Z")), null);
+		float[] sidesP2 = new float[] { 15, 15, 30 };
+		var p2 = new Product("Product n\u00BA2", 89.56, 2.5f, sidesP2,
+			from(parse("2023-12-01T00:00:00.00Z")), null);
 		p2.setValidity(18); // 18 months
 		
 		Product p3 = new Product();
 		p3.name = "Product n\u00BA3";
+		p3.manufactureDate = Date.from(Instant.now()
+			.atZone(ZoneId.systemDefault()).minusYears(2).toInstant());
+		p3.setValidity(Year.of(1)); // 1 year
+		
+		System.out.println(p1);
+		System.out.println(p2);
+		System.out.println(p3);
 		
 		System.out.printf("%s", StringUtils.join(p1.name).concat(":")
 			.concat(SPACE).concat(p1.toString()).concat(LF));
@@ -73,7 +81,7 @@ public class ProductTest {
 		double total = shoppingCart.stream().mapToDouble(i -> i).sum();
 		System.out.printf("%n%s%n", getCurrencyInstance().format(total));
 		
-		System.out.printf("%n%s", Instant.now().atZone(ZONE));
+		System.out.printf("%n%s", Instant.now().atZone(ZONE_ID));
 		System.out.printf("%n%s%n%n", df.format(Date.from(Instant.now())));
 		
 		nf.setMaximumFractionDigits(2);
@@ -90,7 +98,7 @@ public class ProductTest {
 		
 		String msgP1 = "Validity p1: %s%n";
 		System.out.printf(msgP1, p1.validityDate);
-		System.out.printf(msgP1, p1.validityDate.toInstant().atZone(ZONE));
+		System.out.printf(msgP1, p1.validityDate.toInstant().atZone(ZONE_ID));
 		System.out.printf(msgP1.concat(LF), dateFormatted(p1.validityDate));
 		
 		nf.setMaximumFractionDigits(1);
@@ -102,13 +110,13 @@ public class ProductTest {
 		
 		String msgFactureP2 = "Facture p2: %s%n";
 		System.out.printf(msgFactureP2,
-			LocalDate.ofInstant(p2.manufactureDate.toInstant(), ZONE));
+			LocalDate.ofInstant(p2.manufactureDate.toInstant(), ZONE_ID));
 		System.out.printf(msgFactureP2, p2.manufactureDate);
 		System.out.printf(msgFactureP2, dateFormatted(p2.manufactureDate));
 		
 		String msgP2 = "Validity p2: %s%n";
 		System.out.printf(msgP2, p2.validityDate);
-		System.out.printf(msgP2, p2.validityDate.toInstant().atZone(ZONE));
+		System.out.printf(msgP2, p2.validityDate.toInstant().atZone(ZONE_ID));
 		System.out.printf(msgP2, dateFormatted(p2.validityDate));
 	}
 	

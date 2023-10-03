@@ -8,7 +8,7 @@ public class TernaryOperator {
 	
 	public static void main(String[] args) {
 		
-		double avg = 5.6;
+		double avg = 6.6;
 		String result = avg >= 7.0 ? APP : avg >= 5.0 ? REC : DIS;
 		System.out.println(result);
 		

@@ -21,7 +21,7 @@ public class ConvertExercise {
 		
 		ArrayList<Double> list = new ArrayList<>();
 		
-		try (Scanner scanner = new Scanner(System.in)) {
+		try (Scanner scanner = new Scanner(System.in).useLocale(locale)) {
 			System.out.println(locale.getDisplayName());
 			System.out.printf("%s (%s)%n",
 				Currency.getInstance(locale).getDisplayName(),

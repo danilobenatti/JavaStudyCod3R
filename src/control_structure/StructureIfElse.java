@@ -1,23 +1,25 @@
 package control_structure;
 
+import static java.math.RoundingMode.HALF_EVEN;
+
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Locale;
+import java.util.Locale.Builder;
 import java.util.Scanner;
 
 public class StructureIfElse {
 	
 	public static void main(String[] args) {
 		
-		Locale localeUS = new Locale.Builder().setRegion("en").setLanguage("US")
-			.build();
+		Builder builder = new Locale.Builder();
+		Locale localeUS = builder.setRegion("en").setLanguage("US").build();
 		
 		BigDecimal value;
 		
-		try (Scanner scanner = new Scanner(System.in).useLocale(localeUS)) {
+		try (Scanner sc = new Scanner(System.in).useLocale(localeUS)) {
 			System.out.print("Inform final note: ");
-			value = scanner.nextBigDecimal().setScale(1, RoundingMode.HALF_EVEN)
-				.abs();
+			value = sc.nextBigDecimal().setScale(1, HALF_EVEN).abs()
+				.stripTrailingZeros();
 		}
 		
 		System.out.println(value);
