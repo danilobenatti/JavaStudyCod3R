@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class ProductTest {
@@ -43,7 +44,7 @@ public class ProductTest {
 		Product.discount = 0.2;
 		
 		var p1 = new Product();
-		p1.name = "Product n\u00BA1";
+		p1.name = "Product n\u00BA 1";
 		p1.price = 150.8;
 		p1.weight = 1.8f;
 		p1.manufactureDate = from(parse("2023-09-19T00:00:00.00-03:00"));
@@ -51,14 +52,14 @@ public class ProductTest {
 		p1.setValidity(365L); // 365 days
 		
 		float[] sidesP2 = new float[] { 15, 15, 30 };
-		var p2 = new Product("Product n\u00BA2", 89.56, 2.5f, sidesP2,
-			from(parse("2023-12-01T00:00:00.00Z")), null);
+		var p2 = new Product("Product n\u00BA 2", 89.56, 2.5f, sidesP2,
+			Date.from(parse("2023-12-01T00:00:00.00Z")), null);
 		p2.setValidity(18); // 18 months
 		
 		Product p3 = new Product();
-		p3.name = "Product n\u00BA3";
-		p3.manufactureDate = Date.from(Instant.now()
-			.atZone(ZoneId.systemDefault()).minusYears(2).toInstant());
+		p3.name = "Product n\u00BA 3";
+		p3.manufactureDate = from(Instant.now().atZone(ZoneId.systemDefault())
+			.minusYears(2).toInstant());
 		p3.setValidity(Year.of(1)); // 1 year
 		
 		System.out.println(p1);
@@ -87,9 +88,12 @@ public class ProductTest {
 		nf.setMaximumFractionDigits(2);
 		nf.setRoundingMode(RoundingMode.HALF_EVEN);
 		
-		System.out.printf("Volume p1: %s%n", nf.format(p1.getCubicVolume()));
-		System.out.printf("Volume p1: %.2f%n", p1.getCubicVolume());
-		System.out.printf("Weight p1: %.2f%n", p1.weight);
+		System.out.println(String.format("Volume p1: %s%c",
+			nf.format(p1.getCubicVolume()), Character.valueOf('\u33A4')));
+		System.out.println(String.format("Volume p1: %.2f%s",
+			p1.getCubicVolume(), CharUtils.toString('\u33A4')));
+		System.out.println(String.format("Weight p1: %.2f%s", p1.weight,
+			CharUtils.toString('\u338F')));
 		
 		String msgFactureP1 = "Facture p1: %s%n";
 		System.out.printf(msgFactureP1, p1.manufactureDate.toInstant());
@@ -104,9 +108,12 @@ public class ProductTest {
 		nf.setMaximumFractionDigits(1);
 		nf.setMinimumFractionDigits(1);
 		
-		System.out.printf("Volume p2: %s%n", nf.format(p2.getCubicVolume()));
-		System.out.printf("Volume p2: %.2f%n", p2.getCubicVolume(p2.sides));
-		System.out.printf("Weight p2: %.2f%n", p2.weight);
+		System.out.println(String.format("Volume p2: %s%c",
+			nf.format(p2.getCubicVolume()), Character.valueOf('\u33A4')));
+		System.out.println(String.format("Volume p2: %.2f%c",
+			p2.getCubicVolume(p2.sides), CharUtils.toChar('\u33A4')));
+		System.out.println(String.format("Weight p2: %.2f%c", p2.weight,
+			CharUtils.toChar('\u338F')));
 		
 		String msgFactureP2 = "Facture p2: %s%n";
 		System.out.printf(msgFactureP2,

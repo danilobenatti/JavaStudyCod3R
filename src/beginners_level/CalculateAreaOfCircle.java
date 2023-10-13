@@ -25,9 +25,8 @@ public class CalculateAreaOfCircle {
 		System.out.println(PI);
 		System.out.println(PI == Math.PI);
 		
-		String str = showInputDialog(null, "Inform radiu", "Input Value",
-			QUESTION_MESSAGE);
-		double radius = Double.parseDouble(str);
+		double radius = Double.parseDouble(showInputDialog(null, "Inform radiu",
+			"Input Value", QUESTION_MESSAGE));
 		double diameter = 2 * radius;
 		
 		double areaByRadio = Math.PI * Math.pow(radius, 2);
@@ -42,23 +41,25 @@ public class CalculateAreaOfCircle {
 		System.out.println(perimeterByRadio);
 		System.out.println(perimeterByDiameter);
 		
-		System.out.printf("Area by radius: %s%n", nf.format(areaByRadio));
-		System.out.printf("Area by \u2205: %.5f%n", areaByDiameter);
-		System.out.printf("Perimeter by radius: %s%n",
-			nf.format(perimeterByRadio));
-		System.out.printf("Perimeter by \u2205: %.6f%n", perimeterByDiameter);
+		System.out.printf("Area by radius: %s%c%n", nf.format(areaByRadio),
+			'\u339F');
+		System.out.printf("Area by \u2205: %.5f%c%n", areaByDiameter, '\u339F');
+		System.out.printf("Perimeter by radius: %s%c%n",
+			nf.format(perimeterByRadio), '\u339C');
+		System.out.printf("Perimeter by \u2205: %.6f%c%n", perimeterByDiameter,
+			'\u339C');
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("Radius info: ");
 		sb.append(radius).append(LF);
 		sb.append("Area by radius: ");
-		sb.append(nf.format(areaByRadio)).append(LF);
+		sb.append(nf.format(areaByRadio)).append('\u339F').append(LF);
 		sb.append("Area by \u2205: ");
-		sb.append(nf.format(areaByDiameter)).append(LF);
+		sb.append(nf.format(areaByDiameter)).append('\u339F').append(LF);
 		sb.append("Perimeter by radius: ");
-		sb.append(nf.format(perimeterByRadio)).append(LF);
+		sb.append(nf.format(perimeterByRadio)).append('\u339C').append(LF);
 		sb.append("Perimeter by \u2205: ");
-		sb.append(nf.format(perimeterByDiameter));
+		sb.append(nf.format(perimeterByDiameter)).append('\u339C');
 		showMessageDialog(null, sb, "Result calc.", INFORMATION_MESSAGE);
 		
 	}
