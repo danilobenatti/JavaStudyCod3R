@@ -17,7 +17,6 @@ public class StructureSwitch {
 		System.out.println(whoIs(c1));
 	}
 	
-	@SuppressWarnings("preview")
 	private static String whoIs(Person person) {
 		return switch (person) {
 			case Employed e -> new StringBuilder().append("Is Employed: ")
