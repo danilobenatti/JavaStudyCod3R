@@ -4,7 +4,7 @@ package beginners_level;
  * First class for study
  * 
  * @author danil
- * @since JDK17
+ * @since JDK21
  * @see
  */
 public class FisrtSteps {
