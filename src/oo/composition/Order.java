@@ -20,7 +20,7 @@ public class Order {
 	
 	public void addItems(List<Item> items) {
 		this.items.addAll(items);
-		items.stream().forEach(i -> i.order = this);
+		items.forEach(i -> i.order = this);
 	}
 	
 	public double getTotal() {
