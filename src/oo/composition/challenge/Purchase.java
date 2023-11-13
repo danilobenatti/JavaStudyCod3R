@@ -1,10 +1,20 @@
 package oo.composition.challenge;
 
+import static java.time.LocalDate.ofInstant;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Purchase {
+	
+	private static final ZoneId ZONE_ID = ZoneId.systemDefault();
 	
 	Date date;
 	
@@ -14,8 +24,16 @@ public class Purchase {
 		this.date = date;
 	}
 	
-	Date getDate() {
-		return this.date;
+	LocalDate getDate() {
+		return ofInstant(this.date.toInstant(), ZONE_ID);
+	}
+	
+	Year getYear() {
+		return Year.of(ofInstant(this.date.toInstant(), ZONE_ID).getYear());
+	}
+	
+	Month getMonth() {
+		return ofInstant(this.date.toInstant(), ZONE_ID).getMonth();
 	}
 	
 	void addItem(Product product, int quantity) {
@@ -31,6 +49,8 @@ public class Purchase {
 	}
 	
 	double getTotal() {
-		return this.items.stream().mapToDouble(Item::getSubTotal).sum();
+		return (BigDecimal.valueOf(
+				this.items.stream().mapToDouble(Item::getSubTotal).sum()))
+				.setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 	}
 }

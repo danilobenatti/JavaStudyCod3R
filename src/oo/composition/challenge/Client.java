@@ -1,10 +1,15 @@
 package oo.composition.challenge;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class Client {
 	
@@ -28,9 +33,16 @@ public class Client {
 		return this.purchases.stream().mapToDouble(p -> p.getTotal()).sum();
 	}
 	
-	Map<Date, Double> getTotalByDate() {
+	Map<LocalDate, Double> getTotalByDate() {
 		return this.purchases.stream()
 				.collect(Collectors.groupingBy(Purchase::getDate,
+						Collectors.summingDouble(Purchase::getTotal)));
+	}
+	
+	Map<Pair<Year, Month>, Double> getTotalByYearAndMonth() {
+		return this.purchases.stream()
+				.collect(Collectors.groupingBy(
+						p -> new ImmutablePair<>(p.getYear(), p.getMonth()),
 						Collectors.summingDouble(Purchase::getTotal)));
 	}
 }
