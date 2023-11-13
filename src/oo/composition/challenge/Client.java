@@ -3,6 +3,7 @@ package oo.composition.challenge;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -44,5 +45,18 @@ public class Client {
 				.collect(Collectors.groupingBy(
 						p -> new ImmutablePair<>(p.getYear(), p.getMonth()),
 						Collectors.summingDouble(Purchase::getTotal)));
+	}
+	
+	Map<YearMonth, Double> getTotalByYearMonth(Year year, Month month) {
+		return this.purchases.stream().filter(
+				p -> p.getYear().equals(year) && p.getMonth().equals(month))
+				.collect(Collectors.groupingBy(p -> year.atMonth(month),
+						Collectors.summingDouble(Purchase::getTotal)));
+	}
+	
+	double getTotalByYearAndMonth(Year year, Month month) {
+		return this.purchases.stream().filter(
+				p -> p.getYear().equals(year) && p.getMonth().equals(month))
+				.collect(Collectors.summingDouble(Purchase::getTotal));
 	}
 }
