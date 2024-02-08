@@ -4,17 +4,20 @@ public class Game {
 	
 	public static void main(String[] args) {
 		
-		Player player = new Player();
+		var player1 = new Villain();
+		player1.x = 10;
+		player1.y = 10;
 		
-		player.x = 10;
-		player.y = 10;
+		var player2 = new Hero();
+		player2.x = 10;
+		player2.y = 11;
 		
-		player.walk(Direction.NORTH);
-		player.walk(Direction.EAST);
-		player.walk(Direction.NORTH);
-		player.walk(Direction.EAST);
+		System.out.println(player1.life);
+		System.out.println(player2.life);
 		
-		System.out.println(player.x);
-		System.out.println(player.y);
+		player1.atack(player2);
+		
+		System.out.println(player1.life);
+		System.out.println(player2.life);
 	}
 }
