@@ -4,20 +4,38 @@ public class Game {
 	
 	public static void main(String[] args) {
 		
-		var player1 = new Villain();
-		player1.x = 10;
-		player1.y = 10;
+		var villain = new Villain();
+		villain.x = 10;
+		villain.y = 10;
 		
-		var player2 = new Hero();
-		player2.x = 10;
-		player2.y = 11;
+		var hero = new Hero();
+		hero.x = 10;
+		hero.y = 11;
 		
-		System.out.println(player1.life);
-		System.out.println(player2.life);
+		System.out.println(msg(villain));
+		System.out.println(msg(hero));
 		
-		player1.atack(player2);
+		villain.atack(hero);
+		hero.atack(villain);
+
+		villain.atack(hero);
+		hero.atack(villain);
 		
-		System.out.println(player1.life);
-		System.out.println(player2.life);
+		villain.walk(Direction.NORTH);
+		villain.atack(hero);
+		hero.atack(villain);
+		
+		System.out.println(msg(villain));
+		System.out.println(msg(hero));
 	}
+	
+	private static String msg(Player player) {
+		return switch (player) {
+			case Hero h -> String.format("Hero Life: %d", h.life);
+			case Villain v -> String.format("Villain Life: %d", v.life);
+			default -> throw new IllegalArgumentException(
+					"Unexpected value: " + player);
+		};
+	}
+	
 }
