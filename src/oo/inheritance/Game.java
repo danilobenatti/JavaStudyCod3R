@@ -8,16 +8,14 @@ public class Game {
 		villain.x = 10;
 		villain.y = 10;
 		
-		var hero = new Hero();
-		hero.x = 10;
-		hero.y = 11;
+		var hero = new Hero(10, 11);
 		
 		System.out.println(msg(villain));
 		System.out.println(msg(hero));
 		
 		villain.atack(hero);
 		hero.atack(villain);
-
+		
 		villain.atack(hero);
 		hero.atack(villain);
 		
