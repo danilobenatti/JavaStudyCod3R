@@ -9,6 +9,8 @@ public class CalculusTest2 {
 		
 		System.out.println(calc1.execute(2, 3));
 		System.out.println(calc2.execute(2, 3));
+		
+		System.out.println(calc1.text());
+		System.out.println(Calculus.other());
 	}
-	
 }
