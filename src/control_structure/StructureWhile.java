@@ -1,51 +1,65 @@
 package control_structure;
 
+import static org.apache.commons.lang3.StringUtils.SPACE;
+
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+
 public class StructureWhile {
+	
+	static Logger logger = LogManager.getLogger();
+	
+	static final int FIND = 25;
 	
 	public static void main(String[] args) {
 		
+		Configurator.initialize(StructureWhile.class.getName(),
+				"./src/util/log4j2.properties");
+		
 		// 0 - 9 (integer)
-		System.out.println(new Random().nextInt(0, 11));
+		logger.info(new Random().nextInt(0, 11));
 		
 		// between 10 and 100 (integer)
-		int min = 10, max = 100;
+		int min = 10;
+		int max = 100;
 		// find by 26 (integer)
-		final int find = 25;
 		
 		// solution 1
-		int i = 0, j = find + 1;
-		while (j != find) {
-			j = (int) (Math.random() * (max - min + 1) + min);
+		int i = 0;
+		int j = FIND + 1;
+		while (j != FIND) {
+			j = (new Random().nextInt(max - min + 1) + min);
 			i++;
 		}
-		message(i, find);
+		message(i, FIND);
 		
 		// solution 2
-		int k = 0, l = 0;
+		int k = 0;
+		int l = 0;
 		do {
 			l = new Random().nextInt(max - min + 1);
 			k++;
-		} while (l != find);
-		message(k, find);
+		} while (l != FIND);
+		message(k, FIND);
 		
 		// between the origin (inclusive) and the bound (exclusive)
-		System.out.println("Random[0 - 100]: " + new Random().nextInt(0, 101));
+		logger.info(() -> "Random[0 - 100]: " + new Random().nextInt(0, 101));
 		
-		System.out.println(ThreadLocalRandom.current().nextInt(0, 10));
-		System.out.println(ThreadLocalRandom.current().nextBoolean());
+		logger.info(ThreadLocalRandom.current().nextInt(0, 10));
+		logger.info(ThreadLocalRandom.current().nextBoolean());
 		
 		for (String v = "#"; !v.equals("######"); v += "#") {
-			System.out.println(v);
+			logger.info(v);
 		}
-		
 	}
 	
 	public static void message(int i, int find) {
-		System.out.println(String.format(
-			"Looping %d times until finding n%c %d", i, '\u00BA', find));
+		logger.info(new StringBuilder().append("Loop").append(SPACE).append(i)
+				.append(SPACE).append("times until finding n").append('\u00BA')
+				.append(SPACE).append(find));
 	}
-	
 }

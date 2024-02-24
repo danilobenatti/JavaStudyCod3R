@@ -11,51 +11,67 @@ import java.util.Map;
 import java.util.Random;
 import java.util.stream.Stream;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+
 import lombok.Getter;
 
 public class RepetitionStructuresExercise {
 	
+	static Logger logger = LogManager.getLogger();
+	
 	public static void main(String[] args) {
+		
+		Configurator.initialize(RepetitionStructuresExercise.class.getName(),
+				"./src/util/log4j2.properties");
 		
 		int[] numbersOfBet = new int[] { 34, 1, 50, 10, 57, 15 };
 		int[] numbersOfBetPlus = new int[] { 35, 2, 51, 15, 60, 25, 8, 45 };
 		int[] numbersOfBetPremium = new int[] { 34, 1, 50, 10, 25, 15, 18, 5,
-			52, 8, 20, 30, 28, 45, 33 };
+				52, 8, 20, 30, 28, 45, 33 };
 		
 		int[] lotteryNumbers = sortition(new Random(), 1, 60, 6);
 		
+		StringBuilder builder = new StringBuilder();
 		for (int number : lotteryNumbers) {
-			System.out.printf("%d  ", number);
+			builder.append(number).append(SPACE);
 		}
+		logger.info(builder);
 		
 		Bet bet = (Bet) showInputDialog(null, "What type of bet?",
-			"Betting type", QUESTION_MESSAGE, null,
-			new Bet[] { Bet.STANDARD, Bet.PLUS, Bet.PREMIUM }, Bet.STANDARD);
+				"Betting type", QUESTION_MESSAGE, null,
+				new Bet[] { Bet.STANDARD, Bet.PLUS, Bet.PREMIUM },
+				Bet.STANDARD);
 		
 		String message = new StringBuilder("Inform ").append(bet.getSize())
-			.append(" numbers: ")
-			.append("\nWith comma separator, Ex. 10, 8, 50...")
-			.append("\nLottery numbers between 1 to 60")
-			.append("\nNon-repeating numbers").toString();
+				.append(" numbers: ")
+				.append("\nWith comma separator, Ex. 10, 8, 50...")
+				.append("\nLottery numbers between 1 to 60")
+				.append("\nNon-repeating numbers").toString();
 		String[] userBet = showInputDialog(null, message, bet.getType(),
-			QUESTION_MESSAGE).strip().replace(SPACE, EMPTY).split(",");
+				QUESTION_MESSAGE).strip().replace(SPACE, EMPTY).split(",");
 		
 		int[] numbersUserBet = Stream.of(userBet).mapToInt(Integer::parseInt)
-			.distinct().toArray();
+				.distinct().toArray();
 		
-		System.out.printf("%nBet Standard(%d): %s", numbersOfBet.length,
-			Arrays.asList(resultOfBet(numbersOfBet, lotteryNumbers)));
-		System.out.printf("%nBet Plus(%d): %s", numbersOfBetPlus.length,
-			Arrays.asList(resultOfBet(numbersOfBetPlus, lotteryNumbers)));
-		System.out.printf("%nBet Premium(%d): %s", numbersOfBetPremium.length,
-			Arrays.asList(resultOfBet(numbersOfBetPremium, lotteryNumbers)));
-		System.out.printf("%nBet User(%d): %s", numbersUserBet.length,
-			Arrays.asList(resultOfBet(numbersUserBet, lotteryNumbers)));
+		logger.info(() -> String.format("%nBet User(%d): %s",
+				numbersUserBet.length,
+				Arrays.asList(resultOfBet(numbersUserBet, lotteryNumbers))));
+		logger.info(() -> String.format("%nBet Standard(%d): %s",
+				numbersOfBet.length,
+				Arrays.asList(resultOfBet(numbersOfBet, lotteryNumbers))));
+		logger.info(() -> String.format("%nBet Plus(%d): %s",
+				numbersOfBetPlus.length,
+				Arrays.asList(resultOfBet(numbersOfBetPlus, lotteryNumbers))));
+		logger.info(() -> String.format("%nBet Premium(%d): %s",
+				numbersOfBetPremium.length, Arrays.asList(
+						resultOfBet(numbersOfBetPremium, lotteryNumbers))));
 		
 	}
 	
 	public static Map<Integer, Boolean> resultOfBet(int[] numbersOfBet,
-		int[] lotteryNumbers) {
+			int[] lotteryNumbers) {
 		Map<Integer, Boolean> result = new HashMap<>();
 		for (int j : lotteryNumbers) {
 			for (int k : numbersOfBet) {

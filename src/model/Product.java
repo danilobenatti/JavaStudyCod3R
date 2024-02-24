@@ -12,13 +12,18 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Product {
 	
 	String name;
 	
 	double price;
 	
-	static double discount = 0.1;
+	double discount = 0.1;
 	
 	float weight;
 	
@@ -38,8 +43,19 @@ public class Product {
 		this(1, 1, 1);
 	}
 	
+	public Product(String name, double price, double discount, float weight,
+			float[] sides, Date manufactureDate, Date validityDate) {
+		this.name = name;
+		this.price = price;
+		this.discount = discount;
+		this.weight = weight;
+		this.sides = sides;
+		this.manufactureDate = manufactureDate;
+		this.validityDate = validityDate;
+	}
+	
 	public Product(String name, double price, float weight, float[] sides,
-		Date manufactureDate, Date validityDate) {
+			Date manufactureDate, Date validityDate) {
 		this.name = name;
 		this.price = price;
 		this.weight = weight;
@@ -55,11 +71,11 @@ public class Product {
 		this.sides = new float[] { xSize, ySize, zSize };
 	}
 	
-	double getPriceWithDiscount() {
-		return this.price * (1 - discount);
+	public double getPriceWithDiscount() {
+		return this.price * (1 - this.discount);
 	}
 	
-	double getPriceWithDiscount(double discount) {
+	public double getPriceWithDiscount(double discount) {
 		return this.price * (1 - discount);
 	}
 	
@@ -72,12 +88,12 @@ public class Product {
 		// assume that 1 day = 8,64e+7 milliseconds
 		final double oneDayMilli = 8.64E7;
 		this.validityDate = new Date(
-			(long) (this.manufactureDate.getTime() + (days * oneDayMilli)));
+				(long) (this.manufactureDate.getTime() + (days * oneDayMilli)));
 	}
 	
 	public void setValidity(long days) {
-		this.validityDate = Date
-			.from(this.manufactureDate.toInstant().plus(days, ChronoUnit.DAYS));
+		this.validityDate = Date.from(
+				this.manufactureDate.toInstant().plus(days, ChronoUnit.DAYS));
 	}
 	
 	/**
@@ -88,36 +104,36 @@ public class Product {
 	public void setValidity_(int months) {
 		// assume that 1 month = 2,628e+9 milliseconds
 		final double oneMonthMilli = 2.628E9;
-		this.validityDate = new Date(
-			(long) (this.manufactureDate.getTime() + (months * oneMonthMilli)));
+		this.validityDate = new Date((long) (this.manufactureDate.getTime()
+				+ (months * oneMonthMilli)));
 	}
 	
 	public void setValidity(int months) {
 		this.validityDate = Date.from(this.manufactureDate.toInstant()
-			.atZone(ZoneId.systemDefault()).plusMonths(months).toInstant());
+				.atZone(ZoneId.systemDefault()).plusMonths(months).toInstant());
 		
 	}
 	
 	public void setValidity(Year year) {
 		this.validityDate = Date.from(
-			this.manufactureDate.toInstant().atZone(ZoneId.systemDefault())
-				.plusYears(year.getValue()).toInstant());
+				this.manufactureDate.toInstant().atZone(ZoneId.systemDefault())
+						.plusYears(year.getValue()).toInstant());
 	}
 	
 	public Date getValidityDateByDays(long days) {
-		return Date
-			.from(this.manufactureDate.toInstant().plus(days, ChronoUnit.DAYS));
+		return Date.from(
+				this.manufactureDate.toInstant().plus(days, ChronoUnit.DAYS));
 	}
 	
 	public Date getValidityDateByMonths(int months) {
 		return Date.from(this.manufactureDate.toInstant()
-			.atZone(ZoneId.systemDefault()).plusMonths(months).toInstant());
+				.atZone(ZoneId.systemDefault()).plusMonths(months).toInstant());
 	}
 	
 	public boolean validityDateIsOk() {
 		if (this.validityDate != null) {
 			return Date.from(Instant.now().truncatedTo(ChronoUnit.DAYS))
-				.compareTo(this.validityDate) < 0;
+					.compareTo(this.validityDate) < 0;
 		}
 		return false;
 	}
@@ -153,6 +169,8 @@ public class Product {
 		sb.append(name);
 		sb.append(", price=");
 		sb.append(price);
+		sb.append(", discount=");
+		sb.append(discount);
 		sb.append(", weight=");
 		sb.append(weight);
 		sb.append(", sides=");

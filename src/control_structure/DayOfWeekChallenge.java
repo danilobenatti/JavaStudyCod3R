@@ -10,19 +10,28 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.Locale.Builder;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+
 public class DayOfWeekChallenge {
+	
+	static Logger logger = LogManager.getLogger();
 	
 	public static String getFullDayWeekByLocale(LocalDate date, Locale locale) {
 		locale = locale == null ? Locale.US : locale;
 		return switch (locale.toLanguageTag()) {
 			case "pt-BR" -> capitalize(
-				date.getDayOfWeek().getDisplayName(TextStyle.FULL, locale));
+					date.getDayOfWeek().getDisplayName(TextStyle.FULL, locale));
 			default ->
 				date.getDayOfWeek().getDisplayName(TextStyle.FULL, locale);
 		};
 	}
 	
 	public static void main(String[] args) {
+		
+		Configurator.initialize(DayOfWeekChallenge.class.getName(),
+				"./src/util/log4j2.properties");
 		
 		Builder builder = new Locale.Builder();
 		Locale localeBR = builder.setLanguage("pt").setRegion("BR").build();
@@ -34,29 +43,29 @@ public class DayOfWeekChallenge {
 		DayOfWeek dayWeek = date.getDayOfWeek();
 		
 		// ISO-8601 standard, from 1 (Monday) to 7 (Sunday).
-		System.out.println(new StringBuilder().append(date).append(SPACE)
-			.append("Day Of Week: ").append(dayWeek.getValue()).append(SPACE)
-			.append(getFullDayWeekByLocale(date, localeBR)));
+		logger.info(new StringBuilder().append(date).append(SPACE)
+				.append("Day Of Week: ").append(dayWeek.getValue())
+				.append(SPACE).append(getFullDayWeekByLocale(date, localeBR)));
 		
 		LocalDate now = LocalDate.now();
 		
-		System.out.println(
-			new StringBuilder().append(getFullDayWeekByLocale(now, localeBR))
-				.append(SPACE).append('\u0028')
-				.append(now.getDayOfWeek().getValue()).append('\u0029'));
+		logger.info(new StringBuilder()
+				.append(getFullDayWeekByLocale(now, localeBR)).append(SPACE)
+				.append('\u0028').append(now.getDayOfWeek().getValue())
+				.append('\u0029'));
 		
-		System.out.println(
-			String.format("%s (%d)", getFullDayWeekByLocale(now, localeUS),
+		logger.info(() -> String.format("%s (%d)",
+				getFullDayWeekByLocale(now, localeUS),
 				now.getDayOfWeek().getValue()));
 		
 		LocalDate bornDate = LocalDate.of(1982, Month.JULY, 3);
-		System.out.println(String.format("%s (%d) (%s)",
-			getFullDayWeekByLocale(bornDate, localeBR),
-			bornDate.getDayOfWeek().getValue(),
-			bornDate.getDayOfWeek().getDisplayName(TextStyle.SHORT, localeBR)));
+		logger.info(() -> String.format("%s (%d) (%s)",
+				getFullDayWeekByLocale(bornDate, localeBR),
+				bornDate.getDayOfWeek().getValue(), bornDate.getDayOfWeek()
+						.getDisplayName(TextStyle.SHORT, localeBR)));
 		
 		// Enums values
-		System.out.println(dayWeek.ordinal() + SPACE + dayWeek.name());
+		logger.info(() -> dayWeek.ordinal() + SPACE + dayWeek.name());
 		
 		String str = switch (now.getDayOfWeek().getValue()) {
 			case 1 -> "SEG";
@@ -80,12 +89,13 @@ public class DayOfWeekChallenge {
 			default -> "Unexpected value";
 		};
 		
-		System.out.println(String.format("%s (%s) %d", str,
-			getFullDayWeekByLocale(now, localeBR),
-			now.getDayOfWeek().getValue()));
+		logger.info(() -> String.format("%s (%s) %d", str,
+				getFullDayWeekByLocale(now, localeBR),
+				now.getDayOfWeek().getValue()));
 		
-		System.out.println(String.format("%s (%s) %d", result,
-			getFullDayWeekByLocale(now, null), now.getDayOfWeek().ordinal()));
+		logger.info(() -> String.format("%s (%s) %d", result,
+				getFullDayWeekByLocale(now, null),
+				now.getDayOfWeek().ordinal()));
 	}
 	
 }
