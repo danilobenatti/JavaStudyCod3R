@@ -15,12 +15,12 @@ public class PredicateTest {
 	
 	private static NumberFormat cf = NumberFormat.getCurrencyInstance();
 	
+	static double price = 2500;
+	
 	public static void main(String[] args) {
 		
 		Configurator.initialize(PredicateTest.class.getName(),
 				"./src/util/log4j2.properties");
-		
-		double price = 2500;
 		
 		Predicate<Product> isExpensive = p -> (p.getPrice()
 				* (1 - p.getDiscount())) >= price;
@@ -28,7 +28,9 @@ public class PredicateTest {
 		Product p = new Product();
 		p.setName("Product test");
 		p.setPrice(3893.89);
+		p.setDiscount(0.2);
 		
+		logger.info(p);
 		logger.info(() -> String.format("%s it's more expensive than %s? %s",
 				cf.format(p.getPriceWithDiscount()), cf.format(price),
 				isExpensive.test(p) ? "Yes" : "No"));
