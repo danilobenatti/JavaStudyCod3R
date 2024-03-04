@@ -19,7 +19,7 @@ public class MapChallenge {
 		Configurator.initialize(MapChallenge.class.getName(),
 				"./src/util/log4j2.properties");
 		
-		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 		
 		/*
 		 * 1. Number to binary string. ex. 6 -> 110
@@ -38,9 +38,9 @@ public class MapChallenge {
 				toBinary.andThen(invert).andThen(toInteger).apply(8));
 		
 		numbers.stream().map(toBinary).map(invert).map(toInteger)
-		.forEach(t -> logger.printf(Level.INFO, "%s", t));
+		.forEach(t -> logger.printf(Level.INFO, "Ex1.: %s", t));
 		
 		numbers.stream().map(Integer::toBinaryString).map(invert).map(toInteger)
-				.forEach(t -> logger.printf(Level.INFO, "%s", t));
+				.forEach(t -> logger.printf(Level.INFO, "Ex2.: %s", t));
 	}
 }

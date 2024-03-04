@@ -56,7 +56,7 @@ public class ProductTest {
 		p1.setDiscount(0.25);
 		
 		float[] sidesP2 = new float[] { 15, 15, 30 };
-		var p2 = new Product("Product n\u00BA 2", 89.56, 0.25, 2.5f, sidesP2,
+		var p2 = new Product("Product n\u00BA 2", 89.56, 0.25, 0, 2.5f, sidesP2,
 				Date.from(parse("2023-12-01T00:00:00.00Z")), null);
 		p2.setValidity(18); // 18 months
 		

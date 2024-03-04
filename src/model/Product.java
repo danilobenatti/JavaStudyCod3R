@@ -25,6 +25,8 @@ public class Product {
 	
 	double discount = 0.1;
 	
+	double shippingCost;
+	
 	float weight;
 	
 	float xSize;
@@ -43,22 +45,26 @@ public class Product {
 		this(1, 1, 1);
 	}
 	
-	public Product(String name, double price, double discount, float weight,
-			float[] sides, Date manufactureDate, Date validityDate) {
+	// sthsrthsrth
+	public Product(String name, double price, double discount,
+			double shippingCost, float weight, float[] sides,
+			Date manufactureDate, Date validityDate) {
 		this.name = name;
 		this.price = price;
 		this.discount = discount;
+		this.shippingCost = shippingCost;
 		this.weight = weight;
 		this.sides = sides;
 		this.manufactureDate = manufactureDate;
 		this.validityDate = validityDate;
 	}
 	
-	public Product(String name, double price, float weight, float[] sides,
-			Date manufactureDate, Date validityDate) {
+	public Product(String name, double price, float weight, double shippingCost,
+			float[] sides, Date manufactureDate, Date validityDate) {
 		this.name = name;
 		this.price = price;
 		this.weight = weight;
+		this.shippingCost = shippingCost;
 		this.sides = sides;
 		this.manufactureDate = manufactureDate;
 		this.validityDate = validityDate;
@@ -69,6 +75,15 @@ public class Product {
 		this.ySize = ySize;
 		this.zSize = zSize;
 		this.sides = new float[] { xSize, ySize, zSize };
+	}
+	
+	public Product(String name, double price, double discount,
+			double shippingCost, float weight) {
+		this.name = name;
+		this.price = price;
+		this.discount = discount;
+		this.shippingCost = shippingCost;
+		this.weight = weight;
 	}
 	
 	public double getPriceWithDiscount() {
@@ -163,7 +178,7 @@ public class Product {
 	
 	@Override
 	public String toString() {
-		var df = getDateInstance(DateFormat.SHORT, Locale.of("pt", "BR"));
+		var df = getDateInstance(DateFormat.SHORT, Locale.ROOT);
 		StringBuilder sb = new StringBuilder();
 		sb.append("Product [name=");
 		sb.append(name);
@@ -171,6 +186,8 @@ public class Product {
 		sb.append(price);
 		sb.append(", discount=");
 		sb.append(discount);
+		sb.append(", shippingCost=");
+		sb.append(shippingCost);
 		sb.append(", weight=");
 		sb.append(weight);
 		sb.append(", sides=");

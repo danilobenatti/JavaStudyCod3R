@@ -19,18 +19,18 @@ public class ArrayListCode {
 		List<Product> products = new ArrayList<>();
 		
 		Product p1 = new Product("Product Test 1", 10.5, 5.0f,
-			new float[] { 5, 4, 3 }, Date.from(Instant.now()), null);
+			0, new float[] { 5, 4, 3 }, Date.from(Instant.now()), null);
 		p1.setValidity(365L);
 		
 		Date manufactured2YearAgo = Date.from(
 			LocalDate.now().minusYears(2).atStartOfDay(ZONEID).toInstant());
 		
 		Product p2 = new Product("Product Test 2", 15.5, 7.5f,
-			new float[] { 7, 8, 9 }, manufactured2YearAgo, null);
+			0, new float[] { 7, 8, 9 }, manufactured2YearAgo, null);
 		p2.setValidity(24);
 		
 		Product p3 = new Product("Product Test 3", 15.5, 7.5f,
-			new float[] { 9, 5, 2 }, manufactured2YearAgo, null);
+			0, new float[] { 9, 5, 2 }, manufactured2YearAgo, null);
 		p3.setValidity(Year.of(1));
 		
 		products.add(p1);

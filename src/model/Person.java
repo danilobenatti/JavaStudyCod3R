@@ -1,9 +1,9 @@
 package model;
 
 import static java.time.format.DateTimeFormatter.ofLocalizedDate;
-import static org.apache.commons.lang3.math.NumberUtils.INTEGER_ZERO;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -35,7 +35,15 @@ public class Person {
 	
 	private float weight;
 	
+	public double getWeight() {
+		return Double.valueOf(this.weight);
+	}
+	
 	private float height;
+	
+	public double getHeight() {
+		return Double.valueOf(this.height);
+	}
 	
 	private LocalDate bornDate;
 	
@@ -45,42 +53,41 @@ public class Person {
 		return this.deathDate == null;
 	}
 	
-	public Integer getAge() {
-		if (deathDate == null) {
-			return LocalDate.now().minusYears(bornDate.getYear()).getYear();
-		} else if (!isAlive() && deathDate.compareTo(bornDate) > 0) {
-			// 'deathDate' occurs after 'bornDate'
-			return deathDate.minusYears(bornDate.getYear()).getYear();
-		} else {
-			return INTEGER_ZERO;
+	public int getAge() {
+		LocalDate now = LocalDate.now();
+		if (!isAlive() && this.deathDate.isAfter(this.bornDate)) {
+			return Period.between(this.bornDate, this.deathDate).getYears();
+		} else if (isAlive() && this.bornDate.isBefore(now)) {
+			return Period.between(this.bornDate, now).getYears();
 		}
+		return 0;
 	}
 	
 	public String getAgeWithSymbol() {
-		String age = getAge().toString();
-		return isAlive() ? age.concat(String.valueOf('\u2605'))
-			: age.concat(String.valueOf('\u2020'));
+		return isAlive()
+				? String.valueOf(getAge()).concat(String.valueOf('\u2605'))
+				: String.valueOf(getAge()).concat(String.valueOf('\u2020'));
 	}
 	
 	public void killPersonNow() {
 		if (this.bornDate != null && this.deathDate == null
-			&& LocalDate.now().compareTo(this.bornDate) >= 0) {
+				&& LocalDate.now().compareTo(this.bornDate) >= 0) {
 			this.deathDate = LocalDate.now(ZoneId.systemDefault());
 		}
 	}
 	
 	public void killPersonAtDate(LocalDate date) {
 		if (this.bornDate != null && this.deathDate == null
-			&& date.compareTo(this.bornDate) >= 0) {
+				&& date.compareTo(this.bornDate) >= 0) {
 			this.deathDate = date;
 		}
 	}
 	
 	public void killPersonAtDate(Date date) {
 		LocalDate killDate = date.toInstant().atZone(ZoneId.systemDefault())
-			.toLocalDate();
+				.toLocalDate();
 		if (this.bornDate != null && this.deathDate == null
-			&& killDate.compareTo(this.bornDate) >= 0) {
+				&& killDate.compareTo(this.bornDate) >= 0) {
 			this.deathDate = killDate;
 		}
 	}
@@ -88,7 +95,7 @@ public class Person {
 	public void killPersonAtDate(Date date, ZoneId zoneid) {
 		LocalDate killDate = date.toInstant().atZone(zoneid).toLocalDate();
 		if (this.bornDate != null && this.deathDate == null
-			&& killDate.compareTo(this.bornDate) >= 0) {
+				&& killDate.compareTo(this.bornDate) >= 0) {
 			this.deathDate = killDate;
 		}
 	}
@@ -96,7 +103,7 @@ public class Person {
 	@Override
 	public String toString() {
 		DateTimeFormatter dtf = ofLocalizedDate(FormatStyle.SHORT)
-			.localizedBy(Locale.getDefault());
+				.localizedBy(Locale.getDefault());
 		StringBuilder builder = new StringBuilder();
 		builder.append("Person [id=");
 		builder.append(id);

@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -13,6 +14,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.stream.Stream;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
@@ -24,6 +26,7 @@ public class StartWithStream {
 	static Logger logger = LogManager.getLogger();
 	static ZoneId zoneId = ZoneId.of("America/Sao_Paulo");
 	static TimeZone timeZone = TimeZone.getTimeZone(zoneId);
+	static ZonedDateTime zonedDateTime = ZonedDateTime.now(zoneId);
 	static Locale aLocale = Locale.of("pt", "BR");
 	
 	public static void main(String[] args) {
@@ -31,11 +34,17 @@ public class StartWithStream {
 		Configurator.initialize(StartWithStream.class.getName(),
 				"./src/util/log4j2.properties");
 		
-		DateFormat df = DateFormat.getDateTimeInstance(DateFormat.FULL,
+		DateFormat dfPtBR = DateFormat.getDateTimeInstance(DateFormat.FULL,
 				DateFormat.FULL, aLocale);
+		DateFormat dfEnUS = DateFormat.getDateTimeInstance(DateFormat.FULL,
+				DateFormat.FULL, Locale.of("en", "US"));
+		
 		Instant instant = new GregorianCalendar(timeZone, aLocale).toInstant();
 		
-		logger.info(() -> String.format("%s%n", df.format(Date.from(instant))));
+		logger.printf(Level.INFO, "%s", dfPtBR.format(Date.from(instant)));
+		logger.printf(Level.INFO, "%s", dfEnUS.format(Date.from(instant)));
+		logger.printf(Level.INFO, "%s%n",
+				zonedDateTime.getChronology().getCalendarType());
 		
 		Person p = new Person(1, "Peter Parker", 'M', 78.8F, 1.73F,
 				LocalDate.now().minusYears(17), null);
@@ -45,14 +54,15 @@ public class StartWithStream {
 		
 		Iterator<Object> iterator = list.iterator();
 		while (iterator.hasNext()) {
-			logger.info(iterator::next);
+			logger.printf(Level.INFO, "with While: %s", iterator.next());
 		}
 		
 		for (Object object : list) {
-			logger.info(() -> msg(object));
+			logger.printf(Level.INFO, "with For: %s", msg(object));
 		}
 		
 		Stream<Object> stream = list.stream();
+		
 		stream.forEach(o -> logger.info(msg(o)));
 		
 		list.stream().forEach(o -> logger.info(msg(o)));
