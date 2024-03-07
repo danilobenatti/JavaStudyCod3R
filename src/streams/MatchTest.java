@@ -2,9 +2,6 @@ package streams;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.apache.logging.log4j.LogManager;
@@ -13,21 +10,13 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 import model.Student;
 
-/**
- * https://docs.oracle.com/javase/tutorial/collections/streams/reduction.html
- * https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html
- * 
- * @author danil
- * @since JDK21
- * @see
- */
-public class ReduceTest3 {
+public class MatchTest {
 	
-	static Logger log = LogManager.getLogger();
+	static Logger logger = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
-		Configurator.initialize(ReduceTest3.class.getName(),
+		Configurator.initialize(MatchTest.class.getName(),
 				"./src/util/log4j2.properties");
 		
 		Student s1 = new Student("Bia", 'F', 16, 9.5);
@@ -43,18 +32,15 @@ public class ReduceTest3 {
 		
 		Predicate<Student> approved = s -> s.getAverage() >= 7.5;
 		
-		Function<Student, Double> score = Student::getAverage;
+		Predicate<Student> disapproved = approved.negate();
 		
-		BiFunction<Average, Double, Average> calculeAvg = (average, value) -> {
-			average.accept(value);
-			return average;
-		};
+		logger.info(list.stream().allMatch(approved));
+		logger.info(list.stream().allMatch(disapproved));
+		logger.info(list.stream().anyMatch(approved));
+		logger.info(list.stream().anyMatch(disapproved));
+		logger.info(list.stream().noneMatch(approved));
+		logger.info(list.stream().noneMatch(disapproved));
 		
-		BinaryOperator<Average> combiner = Average::combine;
-		
-		Average result = list.stream().filter(approved).map(score)
-				.reduce(new Average(), calculeAvg, combiner);
-		log.info(result::average);
 	}
 	
 }

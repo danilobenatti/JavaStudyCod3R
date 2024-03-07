@@ -17,7 +17,14 @@ public class AverageTest {
 		avg1.accept(8.3);
 		avg1.accept(6.7);
 		
+		Average avg2 = new Average();
+		avg2.accept(8.5);
+		avg2.accept(7.0);
+		
 		logger.info(avg1.average());
+		logger.info(avg2.average());
+		
+		logger.info(Average.combine(avg1, avg2).average());
 		
 	}
 	
