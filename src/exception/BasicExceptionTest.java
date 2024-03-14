@@ -1,5 +1,6 @@
 package exception;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,12 +22,12 @@ public class BasicExceptionTest {
 		try {
 			printNameOfStudent(student);
 		} catch (Exception ex) {
-			log.printf(Level.ERROR, "Error: print student: %s",
+			log.printf(Level.ERROR, "Error: when printing student: %s",
 					ex.getMessage());
 		}
 		
 		try {
-			log.info(7 / 0);
+			log.info(7 / NumberUtils.INTEGER_ZERO);
 		} catch (ArithmeticException ex) {
 			log.printf(Level.ERROR, "Error: division by zero: %s",
 					ex.getMessage());
@@ -36,7 +37,7 @@ public class BasicExceptionTest {
 	}
 	
 	public static void printNameOfStudent(Student student) {
-		log.printf(Level.INFO, "Name for student: %s", student.getName());
+		log.printf(Level.INFO, "Name of student: %s", student.getName());
 	}
 	
 }

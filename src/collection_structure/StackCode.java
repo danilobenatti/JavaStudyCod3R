@@ -3,9 +3,19 @@ package collection_structure;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+
 public class StackCode {
 	
+	static Logger logger = LogManager.getLogger();
+	
 	public static void main(String[] args) {
+		
+		Configurator.initialize(StackCode.class.getName(),
+				"./src/util/log4j2.properties");
 		
 		Deque<String> deque = new ArrayDeque<>();
 		
@@ -15,21 +25,21 @@ public class StackCode {
 		deque.add("The Little Prince");
 		
 		for (String str : deque) {
-			System.out.println(str);
+			logger.info(str);
 		}
 		
-		System.out.println(deque.isEmpty());
-		System.out.println(deque.size());
-		System.out.println(deque.contains("Yellowface"));
+		logger.info(deque::isEmpty);
+		logger.info(deque::size);
+		logger.info(deque.contains("Yellowface"));
 		
-		System.out.println(deque.peek());
-		System.out.println(deque.element());
+		logger.info(deque::peek);
+		logger.info(deque::element);
 		
-		System.out.println(deque.poll());
-		System.out.println(deque.poll());
-		System.out.println(deque.pop());
-		System.out.println(deque.remove());
-		System.out.println(deque.poll());
+		logger.info(deque::poll);
+		logger.info(deque::poll);
+		logger.info(deque::pop);
+		logger.printf(Level.INFO, "%s", deque.remove());
+		logger.info(deque::poll);
 	}
 	
 }
