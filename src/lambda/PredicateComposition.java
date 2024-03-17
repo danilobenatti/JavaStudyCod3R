@@ -9,7 +9,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class PredicateComposition {
 	
-	private static Logger logger = LogManager.getLogger();
+	private static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -24,14 +24,14 @@ public class PredicateComposition {
 		
 		int num = 122;
 		
-		logger.info(isEven.and(is3Dig).test(num));
-		logger.info(isEven.and(is3Dig).negate().test(num));
-		logger.info(isEven.or(is3Dig).test(num));
+		log.info(isEven.and(is3Dig).test(num));
+		log.info(isEven.and(is3Dig).negate().test(num));
+		log.info(isEven.or(is3Dig).test(num));
 		
 		Predicate<Integer> p1 = n -> n % 2 == 0;
 		Predicate<Integer> p2 = n -> n >= 100 && n <= 999;
-		logger.info(xor(p1, p2).test(num));
-		logger.info(xor(isEven, is3Dig).test(num));
+		log.info(xor(p1, p2).test(num));
+		log.info(xor(isEven, is3Dig).test(num));
 	}
 	
 	public static <T> Predicate<T> xor(Predicate<T> p1, Predicate<T> p2) {

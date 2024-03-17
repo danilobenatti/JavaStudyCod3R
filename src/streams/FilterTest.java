@@ -20,7 +20,7 @@ import util.Imc;
 
 public class FilterTest {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -30,10 +30,10 @@ public class FilterTest {
 		int[] array = new int[] { 3, 2, 4, 7, 8, 6, 1, 10, 5, 0, 9 };
 		
 		Arrays.stream(array).filter(n -> n % 2 == 0).sorted()
-				.forEach(n -> logger.printf(Level.INFO, "%s", n));
+				.forEach(n -> log.printf(Level.INFO, "%s", n));
 		
 		Arrays.stream(array).filter(n -> n % 2 != 0).sorted()
-				.forEach(n -> logger.printf(Level.INFO, "%s", n));
+				.forEach(n -> log.printf(Level.INFO, "%s", n));
 		
 		Student std1 = studentBuilder().id(1).name("Joe").gender('M').weight(87)
 				.height(1.84F).average(8.7).goodBehavior(true)
@@ -72,7 +72,7 @@ public class FilterTest {
 		Student[] stds = new Student[] { std1, std2, std3, std4, std5, std6 };
 		
 		Arrays.stream(stds).filter(avg).filter(isBehavior).filter(atIdealWeight)
-				.map(msg).forEach(s -> logger.info(s));
+				.map(msg).forEach(s -> log.info(s));
 	}
 	
 }

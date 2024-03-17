@@ -9,7 +9,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class FunctionTest {
 	
-	private static Logger logger = LogManager.getLogger();
+	private static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -22,6 +22,6 @@ public class FunctionTest {
 		
 		UnaryOperator<String> msg = m -> String.format("Number %d is %s", n, m);
 		
-		logger.info(() -> isEven.andThen(msg).apply(n));
+		log.info(() -> isEven.andThen(msg).apply(n));
 	}
 }

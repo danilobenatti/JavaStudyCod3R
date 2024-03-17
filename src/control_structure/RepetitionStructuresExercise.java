@@ -19,7 +19,7 @@ import lombok.Getter;
 
 public class RepetitionStructuresExercise {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -37,7 +37,7 @@ public class RepetitionStructuresExercise {
 		for (int number : lotteryNumbers) {
 			builder.append(number).append(SPACE);
 		}
-		logger.info(builder);
+		log.info(builder);
 		
 		Bet bet = (Bet) showInputDialog(null, "What type of bet?",
 				"Betting type", QUESTION_MESSAGE, null,
@@ -55,16 +55,16 @@ public class RepetitionStructuresExercise {
 		int[] numbersUserBet = Stream.of(userBet).mapToInt(Integer::parseInt)
 				.distinct().toArray();
 		
-		logger.info(() -> String.format("%nBet User(%d): %s",
+		log.info(() -> String.format("%nBet User(%d): %s",
 				numbersUserBet.length,
 				Arrays.asList(resultOfBet(numbersUserBet, lotteryNumbers))));
-		logger.info(() -> String.format("%nBet Standard(%d): %s",
+		log.info(() -> String.format("%nBet Standard(%d): %s",
 				numbersOfBet.length,
 				Arrays.asList(resultOfBet(numbersOfBet, lotteryNumbers))));
-		logger.info(() -> String.format("%nBet Plus(%d): %s",
+		log.info(() -> String.format("%nBet Plus(%d): %s",
 				numbersOfBetPlus.length,
 				Arrays.asList(resultOfBet(numbersOfBetPlus, lotteryNumbers))));
-		logger.info(() -> String.format("%nBet Premium(%d): %s",
+		log.info(() -> String.format("%nBet Premium(%d): %s",
 				numbersOfBetPremium.length, Arrays.asList(
 						resultOfBet(numbersOfBetPremium, lotteryNumbers))));
 		

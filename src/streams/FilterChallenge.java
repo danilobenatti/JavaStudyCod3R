@@ -18,7 +18,7 @@ public class FilterChallenge {
 	
 	static NumberFormat cf = NumberFormat.getCurrencyInstance();
 	static NumberFormat pf = NumberFormat.getPercentInstance();
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -49,7 +49,7 @@ public class FilterChallenge {
 		
 		products.stream().filter(bigDiscount).filter(freeShipping)
 				.filter(relevantPrice).map(promotion)
-				.forEach(p -> logger.printf(Level.INFO, "%s", p));
+				.forEach(p -> log.printf(Level.INFO, "%s", p));
 	}
 	
 }

@@ -1,8 +1,17 @@
 package lambda;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+
 public class ThreadsEx {
 	
+	static Logger log = LogManager.getLogger();
+	
 	public static void main(String[] args) {
+		
+		Configurator.initialize(ThreadsEx.class.getName(),
+				"./src/util/log4j2.properties");
 		
 		Runnable work1 = new Work1();
 		Runnable work2 = new Runnable() {
@@ -10,11 +19,12 @@ public class ThreadsEx {
 			@Override
 			public void run() {
 				for (int i = 0; i < 10; i++) {
-					System.out.println("Task #02");
+					log.info("Task #02");
 					try {
 						Thread.sleep(450);
 					} catch (Exception ex) {
-						ex.printStackTrace();
+						log.error(ex.getMessage());
+						Thread.currentThread().interrupt();
 					}
 				}
 			}
@@ -22,11 +32,12 @@ public class ThreadsEx {
 		
 		Runnable work3 = () -> {
 			for (int i = 0; i < 10; i++) {
-				System.out.println("Task #03");
+				log.info("Task #03");
 				try {
 					Thread.sleep(500);
 				} catch (Exception ex) {
-					ex.printStackTrace();
+					log.error(ex.getMessage());
+					Thread.currentThread().interrupt();
 				}
 			}
 		};
@@ -46,11 +57,12 @@ public class ThreadsEx {
 	
 	static void work3() {
 		for (int i = 0; i < 10; i++) {
-			System.out.println("Task #04");
+			log.info("Task #04");
 			try {
 				Thread.sleep(350);
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				log.error(ex.getMessage());
+				Thread.currentThread().interrupt();
 			}
 		}
 	}

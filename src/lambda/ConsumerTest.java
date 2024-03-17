@@ -19,7 +19,7 @@ import model.Product;
 
 public class ConsumerTest {
 	
-	private static Logger logger = LogManager.getLogger();
+	private static Logger log = LogManager.getLogger();
 	
 	private static NumberFormat cf = getCurrencyInstance(Locale.of("en", "US"));
 	private static NumberFormat pf = getPercentInstance(Locale.of("en", "US"));
@@ -33,7 +33,7 @@ public class ConsumerTest {
 		pf.setRoundingMode(RoundingMode.HALF_EVEN);
 		pf.setMaximumFractionDigits(1);
 		
-		Consumer<Product> showmeProductPrice = p -> logger.info(() -> msg(p));
+		Consumer<Product> showmeProductPrice = p -> log.info(() -> msg(p));
 		
 		Product p1 = new Product();
 		p1.setName("Product Test1");

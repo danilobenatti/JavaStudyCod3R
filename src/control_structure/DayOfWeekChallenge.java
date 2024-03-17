@@ -16,7 +16,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class DayOfWeekChallenge {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static String getFullDayWeekByLocale(LocalDate date, Locale locale) {
 		locale = locale == null ? Locale.US : locale;
@@ -43,29 +43,29 @@ public class DayOfWeekChallenge {
 		DayOfWeek dayWeek = date.getDayOfWeek();
 		
 		// ISO-8601 standard, from 1 (Monday) to 7 (Sunday).
-		logger.info(new StringBuilder().append(date).append(SPACE)
+		log.info(new StringBuilder().append(date).append(SPACE)
 				.append("Day Of Week: ").append(dayWeek.getValue())
 				.append(SPACE).append(getFullDayWeekByLocale(date, localeBR)));
 		
 		LocalDate now = LocalDate.now();
 		
-		logger.info(new StringBuilder()
+		log.info(new StringBuilder()
 				.append(getFullDayWeekByLocale(now, localeBR)).append(SPACE)
 				.append('\u0028').append(now.getDayOfWeek().getValue())
 				.append('\u0029'));
 		
-		logger.info(() -> String.format("%s (%d)",
+		log.info(() -> String.format("%s (%d)",
 				getFullDayWeekByLocale(now, localeUS),
 				now.getDayOfWeek().getValue()));
 		
 		LocalDate bornDate = LocalDate.of(1982, Month.JULY, 3);
-		logger.info(() -> String.format("%s (%d) (%s)",
+		log.info(() -> String.format("%s (%d) (%s)",
 				getFullDayWeekByLocale(bornDate, localeBR),
 				bornDate.getDayOfWeek().getValue(), bornDate.getDayOfWeek()
 						.getDisplayName(TextStyle.SHORT, localeBR)));
 		
 		// Enums values
-		logger.info(() -> dayWeek.ordinal() + SPACE + dayWeek.name());
+		log.info(() -> dayWeek.ordinal() + SPACE + dayWeek.name());
 		
 		String str = switch (now.getDayOfWeek().getValue()) {
 			case 1 -> "SEG";
@@ -89,11 +89,11 @@ public class DayOfWeekChallenge {
 			default -> "Unexpected value";
 		};
 		
-		logger.info(() -> String.format("%s (%s) %d", str,
+		log.info(() -> String.format("%s (%s) %d", str,
 				getFullDayWeekByLocale(now, localeBR),
 				now.getDayOfWeek().getValue()));
 		
-		logger.info(() -> String.format("%s (%s) %d", result,
+		log.info(() -> String.format("%s (%s) %d", result,
 				getFullDayWeekByLocale(now, null),
 				now.getDayOfWeek().ordinal()));
 	}

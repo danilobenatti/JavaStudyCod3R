@@ -12,7 +12,7 @@ import model.Student;
 
 public class MinMaxTest {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -46,14 +46,14 @@ public class MinMaxTest {
 			return 0;
 		};
 		
-		list.stream().max(bestScore).ifPresent(l -> logger.info(l));
-		list.stream().max(worstScore).ifPresent(l -> logger.info(l));
-		list.stream().max(bestScore.reversed()).ifPresent(l -> logger.info(l));
-		list.stream().max(worstScore.reversed()).ifPresent(l -> logger.info(l));
-		list.stream().min(bestScore).ifPresent(l -> logger.info(l));
-		list.stream().min(worstScore).ifPresent(l -> logger.info(l));
-		list.stream().min(bestScore.reversed()).ifPresent(l -> logger.info(l));
-		list.stream().min(worstScore.reversed()).ifPresent(l -> logger.info(l));
+		list.stream().max(bestScore).ifPresent(l -> log.info(l));
+		list.stream().max(worstScore).ifPresent(l -> log.info(l));
+		list.stream().max(bestScore.reversed()).ifPresent(l -> log.info(l));
+		list.stream().max(worstScore.reversed()).ifPresent(l -> log.info(l));
+		list.stream().min(bestScore).ifPresent(l -> log.info(l));
+		list.stream().min(worstScore).ifPresent(l -> log.info(l));
+		list.stream().min(bestScore.reversed()).ifPresent(l -> log.info(l));
+		list.stream().min(worstScore.reversed()).ifPresent(l -> log.info(l));
 	}
 	
 }

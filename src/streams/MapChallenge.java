@@ -12,7 +12,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class MapChallenge {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -34,13 +34,13 @@ public class MapChallenge {
 		
 		Function<String, Integer> toInteger = n -> Integer.parseInt(n, 2);
 		
-		logger.printf(Level.INFO, "%s",
+		log.printf(Level.INFO, "%s",
 				toBinary.andThen(invert).andThen(toInteger).apply(8));
 		
 		numbers.stream().map(toBinary).map(invert).map(toInteger)
-		.forEach(t -> logger.printf(Level.INFO, "Ex1.: %s", t));
+		.forEach(t -> log.printf(Level.INFO, "Ex1.: %s", t));
 		
 		numbers.stream().map(Integer::toBinaryString).map(invert).map(toInteger)
-				.forEach(t -> logger.printf(Level.INFO, "Ex2.: %s", t));
+				.forEach(t -> log.printf(Level.INFO, "Ex2.: %s", t));
 	}
 }

@@ -13,7 +13,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class BinaryOperatorTest {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	static double value1 = 9.8;
 	static double value2 = 5.7;
@@ -29,19 +29,19 @@ public class BinaryOperatorTest {
 				n2) -> avg.applyAsDouble(n1, n2) >= 7.5 ? "Approved"
 						: "Repproved";
 		
-		logger.info(() -> StringUtils.joinWith(SPACE, "Average 1:",
+		log.info(() -> StringUtils.joinWith(SPACE, "Average 1:",
 				avg.applyAsDouble(value1, value2),
 				result.apply(value1, value2)));
 		
 		value2 = 4.7;
 		
-		logger.info(() -> new StringBuilder().append("Average 2: ")
+		log.info(() -> new StringBuilder().append("Average 2: ")
 				.append(avg.applyAsDouble(value1, value2)).append(SPACE)
 				.append(result.apply(value1, value2)));
 		
 		value1 = 10;
 		
-		logger.info(() -> new StringJoiner(SPACE).add("Average 3:")
+		log.info(() -> new StringJoiner(SPACE).add("Average 3:")
 				.add(String.valueOf(avg.applyAsDouble(value1, value2)))
 				.add(result.apply(value1, value2)).toString());
 	}

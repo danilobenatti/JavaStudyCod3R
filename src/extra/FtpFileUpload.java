@@ -59,9 +59,10 @@ public class FtpFileUpload {
 		} finally {
 			try {
 				if (ftpClient.isConnected()) {
-					ftpClient.logout();
+					if (ftpClient.logout())
+							log.info("Logout from FTP.");
 					ftpClient.disconnect();
-					log.info("Logout and Disconnect from FTP.");
+					log.info("Disconnect from FTP.");
 				}
 			} catch (IOException ex) {
 				log.printf(Level.INFO, "Error: %s", ex.getMessage());

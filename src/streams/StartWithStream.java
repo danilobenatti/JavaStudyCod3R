@@ -23,7 +23,7 @@ import model.Person;
 
 public class StartWithStream {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	static ZoneId zoneId = ZoneId.of("America/Sao_Paulo");
 	static TimeZone timeZone = TimeZone.getTimeZone(zoneId);
 	static ZonedDateTime zonedDateTime = ZonedDateTime.now(zoneId);
@@ -41,9 +41,9 @@ public class StartWithStream {
 		
 		Instant instant = new GregorianCalendar(timeZone, aLocale).toInstant();
 		
-		logger.printf(Level.INFO, "%s", dfPtBR.format(Date.from(instant)));
-		logger.printf(Level.INFO, "%s", dfEnUS.format(Date.from(instant)));
-		logger.printf(Level.INFO, "%s%n",
+		log.printf(Level.INFO, "%s", dfPtBR.format(Date.from(instant)));
+		log.printf(Level.INFO, "%s", dfEnUS.format(Date.from(instant)));
+		log.printf(Level.INFO, "%s%n",
 				zonedDateTime.getChronology().getCalendarType());
 		
 		Person p = new Person(1, "Peter Parker", 'M', 78.8F, 1.73F,
@@ -54,20 +54,20 @@ public class StartWithStream {
 		
 		Iterator<Object> iterator = list.iterator();
 		while (iterator.hasNext()) {
-			logger.printf(Level.INFO, "with While: %s", iterator.next());
+			log.printf(Level.INFO, "with While: %s", iterator.next());
 		}
 		
 		for (Object object : list) {
-			logger.printf(Level.INFO, "with For: %s", msg(object));
+			log.printf(Level.INFO, "with For: %s", msg(object));
 		}
 		
 		Stream<Object> stream = list.stream();
 		
-		stream.forEach(o -> logger.info(msg(o)));
+		stream.forEach(o -> log.info(msg(o)));
 		
-		list.stream().forEach(o -> logger.info(msg(o)));
+		list.stream().forEach(o -> log.info(msg(o)));
 		
-		list.iterator().forEachRemaining(o -> logger.info(msg(o)));
+		list.iterator().forEachRemaining(o -> log.info(msg(o)));
 		
 	}
 	

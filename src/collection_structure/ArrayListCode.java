@@ -17,7 +17,7 @@ import model.Product;
 
 public class ArrayListCode {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -45,17 +45,17 @@ public class ArrayListCode {
 		products.add(p2);
 		products.add(p3);
 		
-		logger.info(products.contains(p1));
-		logger.info(products.get(0));
-		logger.info(products.get(1));
-		logger.info(products.get(2));
+		log.info(products.contains(p1));
+		log.info(products.get(0));
+		log.info(products.get(1));
+		log.info(products.get(2));
 		
-		logger.info(products.remove(p1));
+		log.info(products.remove(p1));
 		
 		for (Product product : products) {
-			logger.printf(Level.INFO, "%s", product);
+			log.printf(Level.INFO, "%s", product);
 		}
-		logger.printf(Level.INFO, "%n%s", products.remove(0));
+		log.printf(Level.INFO, "%n%s", products.remove(0));
 		
 	}
 	

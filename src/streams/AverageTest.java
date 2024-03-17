@@ -6,7 +6,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class AverageTest {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -21,10 +21,10 @@ public class AverageTest {
 		avg2.accept(8.5);
 		avg2.accept(7.0);
 		
-		logger.info(avg1.average());
-		logger.info(avg2.average());
+		log.info(avg1.average());
+		log.info(avg2.average());
 		
-		logger.info(Average.combine(avg1, avg2).average());
+		log.info(Average.combine(avg1, avg2).average());
 		
 	}
 	

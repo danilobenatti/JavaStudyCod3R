@@ -11,14 +11,23 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+
 public class ShopTest {
 	
+	static Logger log = LogManager.getLogger();
+	
 	private static final ZoneId ZONE_ID = ZoneId.systemDefault();
-	private static final Locale LOC = Locale.of("pt", "BR");
+	private static final Locale LOC = Locale.getDefault();
 	static NumberFormat nf = NumberFormat.getCurrencyInstance();
 	static DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM, LOC);
 	
 	public static void main(String[] args) {
+		
+		Configurator.initialize(ShopTest.class.getName(),
+				"./src/util/log4j2.properties");
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("d-MMMM-yyyy", LOC);
 		
@@ -43,18 +52,17 @@ public class ShopTest {
 		Client cli1 = new Client("Client 1");
 		cli1.addPurchases(Arrays.asList(purchase1, purchase2, purchase3));
 		
-		System.out.println(sdf.format(purchase1.date));
-		System.out.println(df.format(purchase2.date));
-		System.out.println(df.format(purchase3.date));
+		log.info(() -> sdf.format(purchase1.date));
+		log.info(() -> df.format(purchase2.date));
+		log.info(() -> df.format(purchase3.date));
 		
-		System.out.println(nf.format(cli1.getTotal()));
+		log.info(() -> nf.format(cli1.getTotal()));
 		
-		System.out.println(cli1.getTotalByDate());
-		System.out.println(cli1.getTotalByYearAndMonth());
+		log.info(cli1.getTotalByDate());
+		log.info(cli1.getTotalByYearAndMonth());
 		
-		System.out.println(
-				cli1.getTotalByYearMonth(Year.of(2023), Month.NOVEMBER));
-		System.out.println(nf.format(
+		log.info(cli1.getTotalByYearMonth(Year.of(2023), Month.NOVEMBER));
+		log.info(() -> nf.format(
 				cli1.getTotalByYearAndMonth(Year.of(2023), Month.OCTOBER)));
 	}
 }

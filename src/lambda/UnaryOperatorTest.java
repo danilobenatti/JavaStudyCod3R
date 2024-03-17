@@ -8,7 +8,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class UnaryOperatorTest {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -21,11 +21,11 @@ public class UnaryOperatorTest {
 		
 		IntUnaryOperator powMath = n -> (int) Math.pow(n, 2);
 		
-		logger.info(plusTwo.applyAsInt(1));
-		logger.info(multiByTwo.applyAsInt(2));
-		logger.info(powMath.applyAsInt(3));
-		logger.info(plusTwo.andThen(multiByTwo).andThen(powMath).applyAsInt(4));
-		logger.info(powMath.compose(multiByTwo).compose(plusTwo).applyAsInt(4));
+		log.info(plusTwo.applyAsInt(1));
+		log.info(multiByTwo.applyAsInt(2));
+		log.info(powMath.applyAsInt(3));
+		log.info(plusTwo.andThen(multiByTwo).andThen(powMath).applyAsInt(4));
+		log.info(powMath.compose(multiByTwo).compose(plusTwo).applyAsInt(4));
 		
 	}
 	

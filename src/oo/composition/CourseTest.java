@@ -12,9 +12,18 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+
 public class CourseTest {
 	
+	static Logger log = LogManager.getLogger();
+	
 	public static void main(String[] args) {
+		
+		Configurator.initialize(CourseTest.class.getName(),
+				"./src/util/log4j2.properties");
 		
 		Calendar calendar = Calendar.getInstance(
 				TimeZone.getTimeZone("America/Sao_Paulo"),
@@ -39,16 +48,16 @@ public class CourseTest {
 		course2.addStudents(new ArrayList<>(Arrays.asList(s1, s2, s3)));
 		course3.addStudents(new ArrayList<>(Arrays.asList(s2, s3)));
 		
-		System.out.println(course1.listStudents() + LF);
-		System.out.println(course2.listStudents() + LF);
-		System.out.println(course3.listStudents() + LF);
+		log.info(() -> course1.listStudents() + LF);
+		log.info(() -> course2.listStudents() + LF);
+		log.info(() -> course3.listStudents() + LF);
 		
-		System.out.println(String.format("%s(%s) - %d", s1.name,
-				s1.ageWithSymbol(), totalHours(s1)));
-		System.out.println(new StringBuilder().append(s2.name)
+		log.info(() -> String.format("%s(%s) - %d", s1.name, s1.ageWithSymbol(),
+				totalHours(s1)));
+		log.info(new StringBuilder().append(s2.name)
 				.append(String.format("(%s)", s2.ageWithSymbol())).append(" - ")
 				.append(totalHours(s2)));
-		System.out.println(joinWith(" - ",
+		log.info(() -> joinWith(" - ",
 				String.format("%s(%s)", s3.name, s3.ageWithSymbol()),
 				totalHours(s3)));
 	}

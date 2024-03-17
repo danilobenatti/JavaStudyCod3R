@@ -8,34 +8,44 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 import javax.swing.JOptionPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+
 public class RelationalOperators {
+	
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
+		Configurator.initialize(RelationalOperators.class.getName(),
+				"./src/util/log4j.properties");
+		
 		int a = 97;
 		int b = 'a';
-		System.out.println(a == b);
+		log.info(a == b);
 		
-		System.out.println(3 > 4);
-		System.out.println(30 != 7);
-		System.out.println(3 >= (1 + 2));
-		System.out.println(3 < 7);
-		System.out.println(30 <= 7);
+		log.info(3 > 4);
+		log.info(30 != 7);
+		log.info(3 >= (1 + 2));
+		log.info(3 < 7);
+		log.info(30 <= 7);
 		
 		double grade = Double.parseDouble(showInputDialog("Inform grade:"));
 		boolean goodBehavior = showConfirmDialog(null, "Have good behavior?",
-			"Behavior", JOptionPane.YES_NO_OPTION) == 0;
+				"Behavior", JOptionPane.YES_NO_OPTION) == 0;
 		boolean reachedAverage = grade >= 7.0;
 		boolean willHaveDiscount = goodBehavior && reachedAverage;
 		
 		String result = willHaveDiscount ? "Yes" : "No";
 		
 		showMessageDialog(null,
-			new StringBuilder().append("Will have a discount? ").append(result),
-			"Discount",
-			willHaveDiscount ? INFORMATION_MESSAGE : WARNING_MESSAGE);
+				new StringBuilder().append("Will have a discount? ")
+						.append(result),
+				"Discount",
+				willHaveDiscount ? INFORMATION_MESSAGE : WARNING_MESSAGE);
 		
-		System.out.println("Will have a discount? " + result);
+		log.info(() -> "Will have a discount? " + result);
 	}
 	
 }

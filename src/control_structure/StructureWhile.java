@@ -11,7 +11,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class StructureWhile {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	static final int FIND = 25;
 	
@@ -21,7 +21,7 @@ public class StructureWhile {
 				"./src/util/log4j2.properties");
 		
 		// 0 - 9 (integer)
-		logger.info(new Random().nextInt(0, 11));
+		log.info(new Random().nextInt(0, 11));
 		
 		// between 10 and 100 (integer)
 		int min = 10;
@@ -47,18 +47,18 @@ public class StructureWhile {
 		message(k, FIND);
 		
 		// between the origin (inclusive) and the bound (exclusive)
-		logger.info(() -> "Random[0 - 100]: " + new Random().nextInt(0, 101));
+		log.info(() -> "Random[0 - 100]: " + new Random().nextInt(0, 101));
 		
-		logger.info(ThreadLocalRandom.current().nextInt(0, 10));
-		logger.info(ThreadLocalRandom.current().nextBoolean());
+		log.info(ThreadLocalRandom.current().nextInt(0, 10));
+		log.info(ThreadLocalRandom.current().nextBoolean());
 		
 		for (String v = "#"; !v.equals("######"); v += "#") {
-			logger.info(v);
+			log.info(v);
 		}
 	}
 	
 	public static void message(int i, int find) {
-		logger.info(new StringBuilder().append("Loop").append(SPACE).append(i)
+		log.info(new StringBuilder().append("Loop").append(SPACE).append(i)
 				.append(SPACE).append("times until finding n").append('\u00BA')
 				.append(SPACE).append(find));
 	}

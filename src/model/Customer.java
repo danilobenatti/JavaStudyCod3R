@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
-@SuperBuilder(builderMethodName = "customerBuilder")
+@SuperBuilder(builderMethodName = "customer")
 public class Customer extends Person {
 	
 	@Include

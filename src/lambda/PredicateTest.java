@@ -11,7 +11,7 @@ import model.Product;
 
 public class PredicateTest {
 	
-	private static Logger logger = LogManager.getLogger();
+	private static Logger log = LogManager.getLogger();
 	
 	private static NumberFormat cf = NumberFormat.getCurrencyInstance();
 	
@@ -30,8 +30,8 @@ public class PredicateTest {
 		p.setPrice(3893.89);
 		p.setDiscount(0.2);
 		
-		logger.info(p);
-		logger.info(() -> String.format("%s it's more expensive than %s? %s",
+		log.info(p);
+		log.info(() -> String.format("%s it's more expensive than %s? %s",
 				cf.format(p.getPriceWithDiscount()), cf.format(price),
 				isExpensive.test(p) ? "Yes" : "No"));
 	}

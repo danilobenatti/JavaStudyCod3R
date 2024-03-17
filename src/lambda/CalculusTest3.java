@@ -8,7 +8,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class CalculusTest3 {
 	
-	private static Logger logger = LogManager.getLogger();
+	private static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -16,12 +16,12 @@ public class CalculusTest3 {
 				"./src/util/log4j2.properties");
 		
 		BinaryOperator<Double> calc1 = (x, y) -> x + y;
-		logger.info(calc1.apply(2.0, 3.0));
+		log.info(calc1.apply(2.0, 3.0));
 		
 		calc1 = (x, y) -> x * y;
-		logger.info(calc1.apply(2.0, 3.0));
+		log.info(calc1.apply(2.0, 3.0));
 		
 		calc1 = (x, y) -> Math.pow(x * y, 2);
-		logger.info(calc1.apply(2.0, 3.0));
+		log.info(calc1.apply(2.0, 3.0));
 	}
 }

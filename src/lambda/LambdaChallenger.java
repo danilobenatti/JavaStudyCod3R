@@ -17,7 +17,7 @@ public class LambdaChallenger {
 	private static final Locale IN_LOCALE = Locale.of("pt", "BR");
 	static NumberFormat cf = NumberFormat.getCurrencyInstance(IN_LOCALE);
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -40,7 +40,7 @@ public class LambdaChallenger {
 		
 		Function<Double, String> currencyFormat = d -> cf.format(d);
 		
-		logger.info(() -> calcPrice.andThen(tax).andThen(taxShip)
+		log.info(() -> calcPrice.andThen(tax).andThen(taxShip)
 				.andThen(currencyFormat).apply(product));
 	}
 }

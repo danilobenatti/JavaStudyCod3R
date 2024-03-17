@@ -6,7 +6,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class CalculusTest2 {
 	
-	private static Logger logger = LogManager.getLogger();
+	private static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -16,10 +16,10 @@ public class CalculusTest2 {
 		Calculus calc1 = (x, y) -> x + y;
 		Calculus calc2 = (x, y) -> x * y;
 		
-		logger.info(calc1.execute(2, 3));
-		logger.info(calc2.execute(2, 3));
+		log.info(calc1.execute(2, 3));
+		log.info(calc2.execute(2, 3));
 		
-		logger.info(calc1::text);
-		logger.info(Calculus::other);
+		log.info(calc1::text);
+		log.info(Calculus::other);
 	}
 }

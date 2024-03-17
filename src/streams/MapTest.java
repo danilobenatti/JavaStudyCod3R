@@ -14,7 +14,7 @@ import util.StreamUtil;
 
 public class MapTest {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -24,24 +24,24 @@ public class MapTest {
 		List<String> stamp = new ArrayList<>();
 		stamp.addAll(Arrays.asList("Nike", "Adidas", "Skechers"));
 		
-		stamp.stream().map(String::toUpperCase).forEach(s -> logger.info(s));
+		stamp.stream().map(String::toUpperCase).forEach(s -> log.info(s));
 		stamp.add("New Balance");
 		stamp.add("Penalty");
 		
 		UnaryOperator<String> append = n -> n.concat("!!!");
 		
-		stamp.stream().map(StreamUtil.upperCase).forEach(s -> logger.info(s));
+		stamp.stream().map(StreamUtil.upperCase).forEach(s -> log.info(s));
 		
-		stamp.stream().map(StreamUtil.lowerCase).forEach(s -> logger.info(s));
+		stamp.stream().map(StreamUtil.lowerCase).forEach(s -> log.info(s));
 		
 		stamp.stream().map(StreamUtil.firstLetter.andThen(StreamUtil.upperCase))
-				.forEach(s -> logger.printf(Level.INFO, "%s", s));
+				.forEach(s -> log.printf(Level.INFO, "%s", s));
 		
 		stamp.stream().map(StreamUtil.lastLetter)
-				.forEach(s -> logger.printf(Level.INFO, "%s", s));
+				.forEach(s -> log.printf(Level.INFO, "%s", s));
 		
 		stamp.stream().map(StreamUtil.upperCase).map(StreamUtil.firstLetter)
-				.map(append).forEach(s -> logger.printf(Level.INFO, "%s", s));
+				.map(append).forEach(s -> log.printf(Level.INFO, "%s", s));
 	}
 	
 }

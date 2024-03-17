@@ -11,9 +11,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class ArraysMatrix {
 	
-	private static final Locale LOCALE = Locale.of("pt", "BR");
-	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
@@ -26,10 +24,11 @@ public class ArraysMatrix {
 		 * float[][] students = { { Students }, { Grades } };
 		 */
 		
-		try (Scanner sc = new Scanner(System.in).useLocale(LOCALE)) {
-			logger.info("How many students?");
+		try (Scanner sc = new Scanner(System.in)
+				.useLocale(Locale.of("pt", "BR"))) {
+			log.info("How many students?");
 			int numberOfStudents = Integer.parseInt(sc.next().strip());
-			logger.info("How many grades per student?");
+			log.info("How many grades per student?");
 			int numberOfGrades = Integer.parseInt(sc.next().strip());
 			
 			students = new float[numberOfStudents][numberOfGrades];
@@ -37,11 +36,11 @@ public class ArraysMatrix {
 			int i = 0;
 			for (float[] student : students) {
 				String msg = String.format("Student %d%n", i + 1);
-				logger.info(msg);
+				log.info(msg);
 				int j = 0;
 				for (float grade : student) {
 					msg = String.format("Grade %d: ", j + 1);
-					logger.info(msg);
+					log.info(msg);
 					students[i][j] = parseFloat(sc.next().replace(',', '.'));
 					j++;
 				}
@@ -62,11 +61,11 @@ public class ArraysMatrix {
 			avgTotal += avgByStudent;
 			String msg = String.format("Student %d average = %.1f%n", i + 1,
 					avgByStudent);
-			logger.info(msg);
+			log.info(msg);
 			i++;
 		}
 		
-		logger.info("Geral average = {}", avgTotal / ((i > 0) ? i : 1));
+		log.info("Geral average = {}", avgTotal / ((i > 0) ? i : 1));
 		
 	}
 	

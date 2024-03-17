@@ -14,7 +14,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class ForeachTest {
 	
-	private static Logger logger = LogManager.getLogger();
+	private static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -40,13 +40,13 @@ public class ForeachTest {
 		}
 		
 		list.forEach(o -> msg(o));
-		list.forEach(o -> logger.info(message(o)));
+		list.forEach(o -> log.info(message(o)));
 		
 		
 	}
 	
 	public static void msg(Object object) {
-		logger.info(new StringBuilder().append(object.toString()).append(" -> ")
+		log.info(new StringBuilder().append(object.toString()).append(" -> ")
 				.append(object.getClass().getSimpleName()));
 	}
 	

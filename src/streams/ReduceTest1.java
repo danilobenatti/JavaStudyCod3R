@@ -12,7 +12,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class ReduceTest1 {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -28,22 +28,22 @@ public class ReduceTest1 {
 		DoubleBinaryOperator div = (x, n) -> x / n;
 		
 		Optional<Integer> total = numbers.parallelStream().reduce(sum);
-		logger.info(total.isPresent() ? total.get() : 0);
+		log.info(total.isPresent() ? total.get() : 0);
 		
-		logger.info(numbers.stream().reduce(100, sum));
-		logger.info(numbers.parallelStream().reduce(100, sum));
+		log.info(numbers.stream().reduce(100, sum));
+		log.info(numbers.parallelStream().reduce(100, sum));
 		
 		numbers.stream().filter(n -> n % 2 == 0).reduce(sum)
-				.ifPresent(n -> logger.info(n));
+				.ifPresent(n -> log.info(n));
 		
 		numbers.stream().filter(n -> n % 2 != 0).reduce(sum)
-				.ifPresent(n -> logger.info(n));
+				.ifPresent(n -> log.info(n));
 		
 		numbers.stream().mapToDouble(Number::doubleValue).filter(n -> n <= 2)
-				.reduce(div).ifPresent(n -> logger.info(n));
+				.reduce(div).ifPresent(n -> log.info(n));
 		
 		numbers.stream().mapToDouble(Number::doubleValue).filter(n -> n >= 2)
-				.reduce(multi).ifPresent(n -> logger.info(n));
+				.reduce(multi).ifPresent(n -> log.info(n));
 		
 	}
 	

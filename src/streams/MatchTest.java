@@ -12,7 +12,7 @@ import model.Student;
 
 public class MatchTest {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -34,12 +34,12 @@ public class MatchTest {
 		
 		Predicate<Student> disapproved = approved.negate();
 		
-		logger.info(list.stream().allMatch(approved));
-		logger.info(list.stream().allMatch(disapproved));
-		logger.info(list.stream().anyMatch(approved));
-		logger.info(list.stream().anyMatch(disapproved));
-		logger.info(list.stream().noneMatch(approved));
-		logger.info(list.stream().noneMatch(disapproved));
+		log.info(list.stream().allMatch(approved));
+		log.info(list.stream().allMatch(disapproved));
+		log.info(list.stream().anyMatch(approved));
+		log.info(list.stream().anyMatch(disapproved));
+		log.info(list.stream().noneMatch(approved));
+		log.info(list.stream().noneMatch(disapproved));
 		
 	}
 	

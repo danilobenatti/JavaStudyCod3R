@@ -13,7 +13,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class StructureIfElse {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -26,16 +26,16 @@ public class StructureIfElse {
 		BigDecimal value;
 		
 		try (Scanner sc = new Scanner(System.in).useLocale(localeUS)) {
-			logger.info("Inform final note: ");
+			log.info("Inform final note: ");
 			value = sc.nextBigDecimal().setScale(1, HALF_EVEN).abs()
 					.stripTrailingZeros();
 		}
 		
-		logger.info(value);
+		log.info(value);
 		
-		logger.info(() -> message1(value));
+		log.info(() -> message1(value));
 		
-		logger.info(() -> message2(value));
+		log.info(() -> message2(value));
 		
 	}
 	

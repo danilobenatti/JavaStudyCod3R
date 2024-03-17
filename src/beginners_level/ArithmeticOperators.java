@@ -1,33 +1,42 @@
 package beginners_level;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
+
 public class ArithmeticOperators {
+	
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
-		System.out.println(2 + 3);
+		Configurator.initialize(ArithmeticOperators.class.getName(),
+				"./src/util/log4j2.properties");
+		
+		log.info(2 + 3);
 		
 		var x = 34.56;
 		double y = 2.2;
 		
-		System.out.println(x + y);
-		System.out.println(x - y);
-		System.out.println(x * y);
-		System.out.println(x / y);
-		System.out.println(x % y);
+		log.info(x + y);
+		log.info(x - y);
+		log.info(x * y);
+		log.info(x / y);
+		log.info(x % y);
 		
 		int a = 8;
 		int b = 3;
 		
-		System.out.println(a + b);
-		System.out.println(a - b);
-		System.out.println(a * b);
-		System.out.println(a / b);
-		System.out.println(a / (float) b);
-		System.out.println(a / (double) b);
-		System.out.println(a % b);
+		log.info(a + b);
+		log.info(a - b);
+		log.info(a * b);
+		log.info(a / b);
+		log.info(a / (float) b);
+		log.info(a / (double) b);
+		log.info(a % b);
 		
 		// (34.56 + 2.2) - ((8 x 3) ÷ 2.2)
-		System.out.println(x + y - a * b / y);
+		log.info(x + y - a * b / y);
 	}
 	
 }

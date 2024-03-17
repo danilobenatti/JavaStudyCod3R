@@ -1,6 +1,6 @@
 package collection_structure;
 
-import static model.Customer.customerBuilder;
+import static model.Customer.customer;
 
 import java.util.HashSet;
 
@@ -12,7 +12,7 @@ import model.Customer;
 
 public class HashSetCode {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -21,21 +21,18 @@ public class HashSetCode {
 		
 		HashSet<Customer> customers = new HashSet<>();
 		
-		var cli1 = customerBuilder().id(1).name("Cloe").email("cloe@mail.com")
-				.build();
-		var cli2 = customerBuilder().id(2).name("Mary").email("mary@pmail.rt")
-				.build();
-		var cli3 = customerBuilder().id(3).name("Peter").email("retep@kmail.yp")
-				.build();
+		var cli1 = customer().id(1).name("Cloe").email("cloe@mail.com").build();
+		var cli2 = customer().id(2).name("Mary").email("mary@pmail.rt").build();
+		var cli3 = customer().id(3).name("Joy").email("yoj@kmail.yp").build();
 		
 		customers.add(cli1);
 		customers.add(cli2);
 		customers.add(cli3);
 		
-		Customer customer = customerBuilder().id(1).name("Cloe")
-				.email("cloe@mail.com").build();
+		var customer = customer().id(1).name("Cloe").email("cloe@mail.com")
+				.build();
 		
-		logger.info(customers.contains(customer));
+		log.info(customers.contains(customer));
 	}
 	
 }

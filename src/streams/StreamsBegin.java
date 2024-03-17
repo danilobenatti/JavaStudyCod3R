@@ -12,7 +12,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 public class StreamsBegin {
 	
-	static Logger logger = LogManager.getLogger();
+	static Logger log = LogManager.getLogger();
 	
 	public static void main(String[] args) {
 		
@@ -25,7 +25,7 @@ public class StreamsBegin {
 		langsBackEnd.forEach(print);
 		
 		Stream.of("Go", "Ruby on Rails", "Angular", "Node.js")
-				.forEach(s -> logger.printf(Level.INFO, ">>> %s", s));
+				.forEach(s -> log.printf(Level.INFO, ">>> %s", s));
 		
 		String[] langsFrontEnd = { "HTML ", "CSS ", "TypeScript ", "JS\n" };
 		
